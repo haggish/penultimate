@@ -1,13 +1,7 @@
 package org.katastrofi.penultimate;
 
-import static java.lang.String.format;
-
-class None extends BaseCommand {
+class None extends BaseCommand implements SystemCommand {
     None(String input) {
         super(input);
-    }
-
-    public String toString() {
-        return format("Nonesuch command %s", input());
     }
 }

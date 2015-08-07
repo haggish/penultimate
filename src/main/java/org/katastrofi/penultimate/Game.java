@@ -8,7 +8,7 @@ class Game implements Commanded {
         if (command instanceof Exit) {
             System.exit(0);
         } else if (command instanceof None) {
-            Optional.of(
+            return Optional.of(
                     new Error(String.format("Nonesuch command %s",
                             ((None) command).input())));
         }
