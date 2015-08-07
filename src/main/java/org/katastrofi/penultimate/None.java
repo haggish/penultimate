@@ -1,7 +1,14 @@
 package org.katastrofi.penultimate;
 
-class None extends BaseCommand implements SystemCommand {
+class None implements SystemCommand {
+
+    private final String input;
+
     None(String input) {
-        super(input);
+        this.input = input;
+    }
+
+    String input() {
+        return input;
     }
 }
