@@ -1,9 +1,9 @@
 package org.katastrofi.penultimate;
 
-import java.io.Console;
+interface Parser<I,O> {
 
-public interface Parser {
+    Command commandFrom(I input);
 
-    Command commandFrom(Console console);
+    O outputFrom(Result result);
 
 }

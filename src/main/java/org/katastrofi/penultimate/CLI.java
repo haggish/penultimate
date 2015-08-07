@@ -2,20 +2,24 @@ package org.katastrofi.penultimate;
 
 import java.io.Console;
 
-public class CLI {
+public class CLI extends ParsingInterface<String, String> {
 
     private final Console console;
 
-    private final Parser parser;
-
-    CLI(Console console, Parser parser) {
+    CLI(Console console, Parser<String, String> parser,
+        ChainOfCommand chainOfCommand) {
+        super(parser, chainOfCommand);
         this.console = console;
-        this.parser = parser;
     }
 
     void run() {
         do {
-            parser.commandFrom(console).execute();
+            System.out.println(handle(console.readLine("Say what? >> ")));
         } while (true);
+    }
+
+    @Override
+    String voidValue() {
+        return "";
     }
 }
