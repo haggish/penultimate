@@ -2,6 +2,14 @@ package org.katastrofi.penultimate;
 
 import java.io.Console;
 
+/**
+ * CLI (Command Line Interface) is a text-based interface to the game.
+ *
+ * A parser is used to parse input to commands and command results to
+ * potential output.
+ *
+ * @see ParsingInterface
+ */
 public class CLI extends ParsingInterface<String, String> {
 
     private final Console console;

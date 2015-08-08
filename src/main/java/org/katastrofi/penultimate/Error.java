@@ -1,5 +1,11 @@
 package org.katastrofi.penultimate;
 
+/**
+ * Error indicates a failed command result.
+ *
+ * @see Result
+ * @see Command
+ */
 public class Error implements Result {
 
     private final String errorMessage;

@@ -19,6 +19,7 @@ public class Main {
         commandMappings.put("se", Exit::new);
         commandMappings.put("sw", Exit::new);
         commandMappings.put("nw", Exit::new);
+        commandMappings.put("take", Exit::new);
 
         new CLI(System.console(), new VerbObjectMeansCLIParser(commandMappings),
                 new SystemCharacterChainOfCommand(new Game(), command -> {

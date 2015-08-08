@@ -1,14 +1,17 @@
 package org.katastrofi.penultimate;
 
-class None implements SystemCommand {
+/**
+ * None is a fallback class for inputs that aren't matched by the parser.
+ */
+class None<T> implements SystemCommand {
 
-    private final String input;
+    private final T input;
 
-    None(String input) {
+    None(T input) {
         this.input = input;
     }
 
-    String input() {
+    T input() {
         return input;
     }
 }
