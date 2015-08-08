@@ -16,13 +16,10 @@ import java.util.Optional;
  */
 class SystemCharacterChainOfCommand implements ChainOfCommand {
 
-    private Game game;
+    private final Game game;
 
-    private Hero hero;
-
-    SystemCharacterChainOfCommand(Game game, Hero hero) {
+    SystemCharacterChainOfCommand(Game game) {
         this.game = game;
-        this.hero = hero;
     }
 
     @Override
@@ -30,7 +27,7 @@ class SystemCharacterChainOfCommand implements ChainOfCommand {
         if (command instanceof SystemCommand) {
             return game.handle(command);
         } else {
-            return hero.handle(command);
+            return game.hero().handle(command);
         }
     }
 }

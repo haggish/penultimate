@@ -9,6 +9,27 @@ import java.util.Optional;
  * @see SystemCommand
  */
 class Game implements Commanded {
+
+    private final InhabitedWorld world;
+
+    private final ExistingCharacter hero;
+
+    Game() {
+        world = new WhiteCube();
+
+        hero = new Human(new Name("Billy", "Bob", "Norris"), world) {
+            @Override
+            public Optional<Result> handle(Command command) {
+                System.out.println(command);
+                return Optional.empty();
+            }
+        };
+    }
+
+    Character hero() {
+        return hero;
+    }
+
     @Override
     public Optional<Result> handle(Command command) {
         if (command instanceof Exit) {

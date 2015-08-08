@@ -2,13 +2,26 @@ package org.katastrofi.penultimate;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import java.util.function.Supplier;
 
 public class Main {
 
     public static void main(String args[]) {
 
+        Game game = new Game();
+
+        Parser<String, String> parser =
+                new VerbObjectMeansCLIParser(commandMappings());
+
+        ChainOfCommand chainOfCommand =
+                new SystemCharacterChainOfCommand(game);
+
+        new CLI(System.console(), parser, chainOfCommand).run();
+
+    }
+
+
+    private static Map<String, Supplier<Command>> commandMappings() {
         Map<String, Supplier<Command>> commandMappings = new HashMap<>();
         commandMappings.put("exit", Exit::new);
         commandMappings.put("n", Exit::new);
@@ -20,12 +33,6 @@ public class Main {
         commandMappings.put("sw", Exit::new);
         commandMappings.put("nw", Exit::new);
         commandMappings.put("take", Exit::new);
-
-        new CLI(System.console(), new VerbObjectMeansCLIParser(commandMappings),
-                new SystemCharacterChainOfCommand(new Game(), command -> {
-                    System.out.println(command);
-                    return Optional.empty();
-                }))
-                .run();
+        return commandMappings;
     }
 }
