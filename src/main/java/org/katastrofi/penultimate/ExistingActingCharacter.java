@@ -22,20 +22,8 @@ abstract class ExistingActingCharacter<T extends Location<T>>
         return brain;
     }
 
-    void makeHappen(Event event) {
-        history.push(event);
-        world().experience(event);
-    }
-
     ActionHistory history() {
         return history;
-    }
-
-    @Override
-    public String toString() {
-        return "ExistingActingCharacter{" +
-                "history=" + history +
-                '}';
     }
 
     public Set<Result> actOut(Command command) {
@@ -44,6 +32,13 @@ abstract class ExistingActingCharacter<T extends Location<T>>
 
     void learn(Skill skill) {
         brain.learn(skill);
+    }
+
+    @Override
+    public String toString() {
+        return "ExistingActingCharacter{" +
+                "history=" + history +
+                '}';
     }
 
     static class ActionHistory {
