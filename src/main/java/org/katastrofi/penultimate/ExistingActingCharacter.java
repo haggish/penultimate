@@ -11,6 +11,8 @@ abstract class ExistingActingCharacter<T extends Location<T>>
 
     private ActionHistory history = new ActionHistory();
 
+    private Possessions possessions = new Possessions();
+
     private Brain<T> brain;
 
     ExistingActingCharacter(InhabitedWorld<T> world) {
@@ -30,7 +32,7 @@ abstract class ExistingActingCharacter<T extends Location<T>>
         return brain.process(command);
     }
 
-    void learn(Skill skill) {
+    void learn(Skill<T> skill) {
         brain.learn(skill);
     }
 
@@ -39,6 +41,10 @@ abstract class ExistingActingCharacter<T extends Location<T>>
         return "ExistingActingCharacter{" +
                 "history=" + history +
                 '}';
+    }
+
+    public void take(Thing thing) {
+        possessions.add(thing);
     }
 
     static class ActionHistory {

@@ -41,7 +41,7 @@ public class Main {
         commandMappings.put("se", () -> Move.to(SOUTHEAST));
         commandMappings.put("sw", () -> Move.to(SOUTHWEST));
         commandMappings.put("nw", () -> Move.to(NORTHWEST));
-        commandMappings.put("take", Exit::new);
+        commandMappings.put("take", Exit::new); // TODO parameters?
         return commandMappings;
     }
 }
