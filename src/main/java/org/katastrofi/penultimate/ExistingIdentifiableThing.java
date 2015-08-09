@@ -21,7 +21,6 @@ abstract class ExistingIdentifiableThing<T extends Location<T>> {
         this.location = world.locateRandomly(this);
         this.id = randomUUID().toString();
         world.add(this);
-        System.out.println(format("Thing %s born!", this));
     }
 
     String id() {

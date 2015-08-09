@@ -16,4 +16,9 @@ abstract class NamedCharacter<T extends Location<T>>
     Name name() {
         return name;
     }
+
+    @Override
+    public String toString() {
+        return name.toString();
+    }
 }

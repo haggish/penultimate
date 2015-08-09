@@ -57,10 +57,6 @@ class Name {
 
     @Override
     public String toString() {
-        return "Name{" +
-                "firstName='" + firstName + '\'' +
-                ", secondName='" + secondName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                '}';
+        return firstName + " " + secondName + " " + lastName;
     }
 }

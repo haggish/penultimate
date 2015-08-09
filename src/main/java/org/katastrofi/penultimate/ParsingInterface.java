@@ -1,8 +1,8 @@
 package org.katastrofi.penultimate;
 
-import java.util.Set;
+import java.util.List;
 
-import static java.util.stream.Collectors.toSet;
+import static java.util.stream.Collectors.toList;
 
 /**
  * An interface that uses the Parser component to parse input into commands.
@@ -22,17 +22,12 @@ abstract class ParsingInterface<I, O> implements Interface<I, O> {
     }
 
     @Override
-    public Set<O> handle(I input) {
+    public List<O> handle(I input) {
         Command command = parser.commandFrom(input);
         return chainOfCommand.actOut(command).stream()
                 .map(parser::outputFrom)
-                .collect(toSet());
+                .collect(toList());
     }
-
-    /**
-     * @return output that signifies missing output
-     */
-    abstract O voidValue();
 
     Parser<I, O> parser() {
         return parser;

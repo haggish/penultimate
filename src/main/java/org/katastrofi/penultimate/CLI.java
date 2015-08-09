@@ -22,12 +22,8 @@ public class CLI extends ParsingInterface<String, String> {
 
     void run() {
         do {
-            System.out.println(handle(console.readLine("Say what? >> ")));
+            handle(console.readLine("Say what? >> ")).stream()
+                    .forEach(System.out::println);
         } while (true);
-    }
-
-    @Override
-    String voidValue() {
-        return "";
     }
 }
