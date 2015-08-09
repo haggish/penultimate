@@ -9,17 +9,17 @@ import java.util.Set;
  */
 class SparseMatrix<T> {
 
-    private final Map<TwoDimensionalCoordinates, T> elements = new HashMap<>();
+    private final Map<XYCoordinates, T> elements = new HashMap<>();
 
-    T get(TwoDimensionalCoordinates c) {
+    T get(XYCoordinates c) {
         return elements.get(c);
     }
 
-    void set(TwoDimensionalCoordinates c, T element) {
+    void set(XYCoordinates c, T element) {
         elements.put(c, element);
     }
 
-    Set<TwoDimensionalCoordinates> coordinates() {
+    Set<XYCoordinates> coordinates() {
         return elements.keySet();
     }
 }

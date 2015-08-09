@@ -4,7 +4,7 @@ package org.katastrofi.penultimate;
  * Two-dimensional, block-based terrain (think Ultimate III).
  */
 class TwoDimensionalBlockBasedTerrain
-        implements Terrain<TwoDimensionalCoordinates> {
+        implements Terrain<XYCoordinates> {
 
     private final SparseMatrix<TerrainFragment> map;
 
@@ -12,7 +12,7 @@ class TwoDimensionalBlockBasedTerrain
         this.map = map;
     }
 
-    public TwoDimensionalCoordinates pickRandomCoordinatesOf(
+    public XYCoordinates pickRandomCoordinatesOf(
             Class<? extends TerrainFragment> tfClass) {
         return map.coordinates().stream()
                 .filter(c -> map.get(c).getClass().equals(tfClass))
@@ -22,7 +22,7 @@ class TwoDimensionalBlockBasedTerrain
     }
 
     @Override
-    public Boolean contains(TwoDimensionalCoordinates coordinates) {
+    public Boolean contains(XYCoordinates coordinates) {
         return map.get(coordinates) != null;
     }
 }

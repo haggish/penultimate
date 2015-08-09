@@ -1,11 +1,11 @@
 package org.katastrofi.penultimate;
 
-import java.util.Set;
+import java.util.List;
 
 /**
  * World is all state that the game environment contains, including terrain
  * and characters.
- *
+ * <p/>
  * It experiences events emitted by characters (and others, including itself?)
  * which can trigger changes in world, including more events.
  *
@@ -18,6 +18,6 @@ interface World {
      *
      * @param event event to be experienced
      */
-    Set<Result> experience(Event event);
+    List<Result> experience(Event event);
 
 }

@@ -7,7 +7,7 @@ package org.katastrofi.penultimate;
  * does not have bounds.
  */
 abstract class FlatConstrainedWorld
-        extends InhabitedWorld<TwoDimensionalCoordinates> {
+        extends InhabitedWorld<XYCoordinates> {
 
     private final TwoDimensionalBlockBasedTerrain terrain;
 
@@ -15,8 +15,8 @@ abstract class FlatConstrainedWorld
         this.terrain = terrain;
     }
 
-    TwoDimensionalCoordinates locateRandomly(
-            ExistingIdentifiableThing<TwoDimensionalCoordinates> thing) {
+    XYCoordinates locateRandomly(
+            ExistingIdentifiableThing<XYCoordinates> thing) {
         return terrain.pickRandomCoordinatesOf(Floor.class);
     }
 

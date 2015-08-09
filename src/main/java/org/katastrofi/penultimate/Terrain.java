@@ -1,5 +1,7 @@
 package org.katastrofi.penultimate;
 
+import java.util.Set;
+
 /**
  * Terrain defines the 'land' of the world.
  *
@@ -10,4 +12,5 @@ interface Terrain<C> {
     C pickRandomCoordinatesOf(Class<? extends TerrainFragment> tfClass);
 
     Boolean contains(C coordinates);
+
 }

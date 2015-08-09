@@ -2,7 +2,7 @@ package org.katastrofi.penultimate;
 
 import java.util.Set;
 
-import static org.katastrofi.penultimate.Sets.setOf;
+import static org.katastrofi.penultimate.CollectionUtils.setOf;
 
 /**
  * Game is the main application class that handles the system commands.
@@ -12,13 +12,14 @@ import static org.katastrofi.penultimate.Sets.setOf;
  */
 class Game implements Commanded {
 
-    private final InhabitedWorld<TwoDimensionalCoordinates> world;
+    private final InhabitedWorld<XYCoordinates> world;
 
-    private final ExistingActingCharacter<TwoDimensionalCoordinates> hero;
+    private final ExistingActingCharacter<XYCoordinates> hero;
 
     Game() {
         world = new WhiteCube();
         hero = new Human<>(new Name("Billy", "Bob", "Norris"), world);
+        new Stone<>(world);
     }
 
     Character hero() {

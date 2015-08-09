@@ -3,25 +3,25 @@ package org.katastrofi.penultimate;
 /**
  * Two dimensional whole number coordinates.
  */
-class TwoDimensionalCoordinates implements Location<TwoDimensionalCoordinates> {
+class XYCoordinates implements Location<XYCoordinates> {
 
     private final int x, y;
 
-    private TwoDimensionalCoordinates(int x, int y) {
+    private XYCoordinates(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
-    static TwoDimensionalCoordinates coord(int x, int y) {
-        return new TwoDimensionalCoordinates(x, y);
+    static XYCoordinates coord(int x, int y) {
+        return new XYCoordinates(x, y);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof TwoDimensionalCoordinates)) return false;
+        if (!(o instanceof XYCoordinates)) return false;
 
-        TwoDimensionalCoordinates that = (TwoDimensionalCoordinates) o;
+        XYCoordinates that = (XYCoordinates) o;
 
         if (x != that.x) return false;
         return y == that.y;
@@ -44,7 +44,7 @@ class TwoDimensionalCoordinates implements Location<TwoDimensionalCoordinates> {
     }
 
     @Override
-    public TwoDimensionalCoordinates oneUnitTo(Direction direction) {
+    public XYCoordinates oneUnitTo(Direction direction) {
         switch (direction) {
             case EAST:
                 return coord(x + 1, y);

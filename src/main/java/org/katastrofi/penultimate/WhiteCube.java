@@ -1,10 +1,10 @@
 package org.katastrofi.penultimate;
 
-import java.util.Set;
+import java.util.List;
 
-import static java.util.Collections.emptySet;
-import static org.katastrofi.penultimate.Sets.setOf;
-import static org.katastrofi.penultimate.TwoDimensionalCoordinates.coord;
+import static java.util.Collections.emptyList;
+import static org.katastrofi.penultimate.CollectionUtils.listOf;
+import static org.katastrofi.penultimate.XYCoordinates.coord;
 
 /**
  * White Cube is a very boring world indeed.
@@ -20,23 +20,29 @@ class WhiteCube extends FlatConstrainedWorld {
     }
 
     @Override
-    public Set<Result> experience(Event event) {
+    public List<Result> experience(Event event) {
         if (event instanceof Movement) {
             Movement movement = (Movement) event;
             if (movement.origin() instanceof Character) {
                 @SuppressWarnings("unchecked")
-                ExistingActingCharacter<TwoDimensionalCoordinates> character =
-                        (ExistingActingCharacter<TwoDimensionalCoordinates>)
+                ExistingActingCharacter<XYCoordinates> character =
+                        (ExistingActingCharacter<XYCoordinates>)
                                 movement.origin();
-                if (terrain().contains(
-                        character.location().oneUnitTo(movement.direction()))) {
-                    return setOf(new Info("Moving to " + movement.direction()));
+                XYCoordinates destination =
+                        character.location().oneUnitTo(movement.direction());
+                if (terrain().contains(destination)) {
+                    List<Result> res = listOf(
+                            new Info("Moving to " + movement.direction()));
+                    thingsAt(destination).stream()
+                            .forEach(t -> res.add(
+                                    new Info("There is a " + t + " here")));
+                    return res;
                 } else {
-                    return setOf(new Error("Can't move outside the map"));
+                    return listOf(new Error("Can't move outside the map"));
                 }
             }
         }
-        return emptySet();
+        return emptyList();
     }
 
     private static TwoDimensionalBlockBasedTerrain createMap() {
