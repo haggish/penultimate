@@ -20,4 +20,9 @@ class TwoDimensionalBlockBasedTerrain
                 .orElseThrow(() ->
                         new IllegalStateException("No terrain of that class"));
     }
+
+    @Override
+    public Boolean contains(TwoDimensionalCoordinates coordinates) {
+        return map.get(coordinates) != null;
+    }
 }

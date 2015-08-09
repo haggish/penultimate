@@ -9,4 +9,5 @@ interface Terrain<C> {
 
     C pickRandomCoordinatesOf(Class<? extends TerrainFragment> tfClass);
 
+    Boolean contains(C coordinates);
 }

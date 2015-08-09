@@ -1,6 +1,7 @@
 package org.katastrofi.penultimate;
 
 import java.util.Set;
+import java.util.function.BiFunction;
 import java.util.function.Predicate;
 
 import static java.util.Collections.emptySet;
@@ -8,7 +9,9 @@ import static java.util.Collections.emptySet;
 /**
  * Skill that character's brain can do.
  */
-public class Skill<T extends Location> {
+public class Skill<T extends Location<T>>
+        implements
+        BiFunction<Command, ExistingActingCharacter<T>, Set<Result>> {
 
     private final Predicate<Command> trigger;
 
@@ -20,9 +23,10 @@ public class Skill<T extends Location> {
         this.action = action;
     }
 
-    Set<Result> apply(Command command, ExistingActingCharacter<T> character) {
+    public Set<Result> apply(Command command,
+                             ExistingActingCharacter<T> character) {
         if (trigger.test(command)) {
-            return action.execute(command, character);
+            return action.apply(command, character);
         } else {
             return emptySet();
         }

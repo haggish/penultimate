@@ -8,7 +8,7 @@ import static java.util.stream.Collectors.toSet;
 /**
  * Brain, i.e. character's ability to react to commands.
  */
-class Brain<T extends Location> {
+class Brain<T extends Location<T>> {
 
     private final ExistingActingCharacter<T> owner;
 
@@ -21,7 +21,8 @@ class Brain<T extends Location> {
     Set<Result> process(Command command) {
         return skillSet.stream()
                 .filter(s -> s.trigger().test(command))
-                .flatMap(s -> s.action().execute(command, owner).stream())
+                .map(Skill::action)
+                .flatMap(a -> a.apply(command, owner).stream())
                 .collect(toSet());
     }
 

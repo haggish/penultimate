@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * World that is inhabited.
  */
-abstract class InhabitedWorld<T extends Location> implements World {
+abstract class InhabitedWorld<T extends Location<T>> implements World {
 
     private Map<String, ExistingIdentifiableThing<T>> thingsByIDs =
             new HashMap<>();
@@ -16,7 +16,7 @@ abstract class InhabitedWorld<T extends Location> implements World {
      *
      * @param thing added thing
      */
-    void add(ExistingIdentifiableThing thing) {
+    void add(ExistingIdentifiableThing<T> thing) {
         thingsByIDs.put(thing.id(), thing);
     }
 

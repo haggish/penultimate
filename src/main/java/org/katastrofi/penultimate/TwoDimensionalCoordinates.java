@@ -3,7 +3,7 @@ package org.katastrofi.penultimate;
 /**
  * Two dimensional whole number coordinates.
  */
-class TwoDimensionalCoordinates implements Location {
+class TwoDimensionalCoordinates implements Location<TwoDimensionalCoordinates> {
 
     private final int x, y;
 
@@ -41,5 +41,29 @@ class TwoDimensionalCoordinates implements Location {
                 "x=" + x +
                 ", y=" + y +
                 '}';
+    }
+
+    @Override
+    public TwoDimensionalCoordinates oneUnitTo(Direction direction) {
+        switch (direction) {
+            case EAST:
+                return coord(x + 1, y);
+            case WEST:
+                return coord(x - 1, y);
+            case NORTH:
+                return coord(x, y + 1);
+            case SOUTH:
+                return coord(x, y - 1);
+            case NORTHEAST:
+                return coord(x + 1, y + 1);
+            case SOUTHEAST:
+                return coord(x + 1, y - 1);
+            case SOUTHWEST:
+                return coord(x - 1, y - 1);
+            case NORTHWEST:
+                return coord(x - 1, y + 1);
+            default:
+                return this;
+        }
     }
 }

@@ -1,5 +1,9 @@
 package org.katastrofi.penultimate;
 
+import java.util.Set;
+
+import static java.util.Collections.emptySet;
+import static org.katastrofi.penultimate.Sets.setOf;
 import static org.katastrofi.penultimate.TwoDimensionalCoordinates.coord;
 
 /**
@@ -16,14 +20,23 @@ class WhiteCube extends FlatConstrainedWorld {
     }
 
     @Override
-    public void experience(Event event) {
+    public Set<Result> experience(Event event) {
         if (event instanceof Movement) {
             Movement movement = (Movement) event;
             if (movement.origin() instanceof Character) {
-                Character character = (Character) movement.origin();
-                // TODO uhh
+                @SuppressWarnings("unchecked")
+                ExistingActingCharacter<TwoDimensionalCoordinates> character =
+                        (ExistingActingCharacter<TwoDimensionalCoordinates>)
+                                movement.origin();
+                if (terrain().contains(
+                        character.location().oneUnitTo(movement.direction()))) {
+                    return setOf(new Info("Moving to " + movement.direction()));
+                } else {
+                    return setOf(new Error("Can't move outside the map"));
+                }
             }
         }
+        return emptySet();
     }
 
     private static TwoDimensionalBlockBasedTerrain createMap() {

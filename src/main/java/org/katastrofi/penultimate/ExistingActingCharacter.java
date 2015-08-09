@@ -6,7 +6,7 @@ import java.util.Set;
 /**
  * Identifiable character that exists somewhere and acts in various ways.
  */
-abstract class ExistingActingCharacter<T extends Location>
+abstract class ExistingActingCharacter<T extends Location<T>>
         extends ExistingIdentifiableThing<T> implements Character {
 
     private ActionHistory history = new ActionHistory();
@@ -25,6 +25,10 @@ abstract class ExistingActingCharacter<T extends Location>
     void makeHappen(Event event) {
         history.push(event);
         world().experience(event);
+    }
+
+    ActionHistory history() {
+        return history;
     }
 
     @Override

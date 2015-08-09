@@ -19,4 +19,8 @@ abstract class FlatConstrainedWorld
             ExistingIdentifiableThing<TwoDimensionalCoordinates> thing) {
         return terrain.pickRandomCoordinatesOf(Floor.class);
     }
+
+    TwoDimensionalBlockBasedTerrain terrain() {
+        return terrain;
+    }
 }

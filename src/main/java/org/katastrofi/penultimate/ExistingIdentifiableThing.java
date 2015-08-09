@@ -8,13 +8,13 @@ import static java.util.UUID.randomUUID;
  *
  * @param <T> location metric that is used to locate the thing
  */
-abstract class ExistingIdentifiableThing<T extends Location> {
+abstract class ExistingIdentifiableThing<T extends Location<T>> {
 
     private final String id;
 
     private final InhabitedWorld<T> world;
 
-    private final T location;
+    private T location;
 
     ExistingIdentifiableThing(InhabitedWorld<T> world) {
         this.world = world;
@@ -36,4 +36,8 @@ abstract class ExistingIdentifiableThing<T extends Location> {
         return location;
     }
 
+    void moveOneUnitTo(Direction direction) {
+        location = location.oneUnitTo(direction);
+        System.out.println("Now at " + location);
+    }
 }
