@@ -1,5 +1,7 @@
 package org.katastrofi.penultimate;
 
+import java.util.Set;
+
 /**
  * Interface is an interface between the game and player.
  *
@@ -15,6 +17,6 @@ interface Interface<I,O> {
      * @param input one input by player
      * @return result of input to the game
      */
-    O handle(I input);
+    Set<O> handle(I input);
 
 }

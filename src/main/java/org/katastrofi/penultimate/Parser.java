@@ -1,5 +1,7 @@
 package org.katastrofi.penultimate;
 
+import java.util.Set;
+
 /**
  * Parser that parses an input to a command and its result to an output.
  *

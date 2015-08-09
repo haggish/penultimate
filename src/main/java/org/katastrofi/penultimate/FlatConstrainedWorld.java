@@ -6,7 +6,8 @@ package org.katastrofi.penultimate;
  * This would not be for example Earth as it is a surface of a sphere that
  * does not have bounds.
  */
-abstract class FlatConstrainedWorld extends InhabitedWorld {
+abstract class FlatConstrainedWorld
+        extends InhabitedWorld<TwoDimensionalCoordinates> {
 
     private final TwoDimensionalBlockBasedTerrain terrain;
 
@@ -14,4 +15,8 @@ abstract class FlatConstrainedWorld extends InhabitedWorld {
         this.terrain = terrain;
     }
 
+    TwoDimensionalCoordinates locateRandomly(
+            ExistingIdentifiableThing<TwoDimensionalCoordinates> thing) {
+        return terrain.pickRandomCoordinatesOf(Floor.class);
+    }
 }

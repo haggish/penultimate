@@ -5,5 +5,5 @@ package org.katastrofi.penultimate;
  *
  * @see Commanded
  */
-interface Character extends Commanded {
+interface Character extends Thing, Commanded {
 }

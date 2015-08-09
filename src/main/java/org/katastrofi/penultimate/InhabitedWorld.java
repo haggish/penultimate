@@ -6,16 +6,19 @@ import java.util.Map;
 /**
  * World that is inhabited.
  */
-abstract class InhabitedWorld implements World {
+abstract class InhabitedWorld<T extends Location> implements World {
 
-    private Map<String, Character> charactersByIDs = new HashMap<>();
+    private Map<String, ExistingIdentifiableThing<T>> thingsByIDs =
+            new HashMap<>();
 
     /**
-     * Add a character to world.
+     * Add a thing to world.
      *
-     * @param character added character
+     * @param thing added thing
      */
-    void add(ExistingCharacter character) {
-        charactersByIDs.put(character.id(), character);
+    void add(ExistingIdentifiableThing thing) {
+        thingsByIDs.put(thing.id(), thing);
     }
+
+    abstract T locateRandomly(ExistingIdentifiableThing<T> character);
 }

@@ -1,6 +1,8 @@
 package org.katastrofi.penultimate;
 
-import java.util.Optional;
+import java.util.Set;
+
+import static org.katastrofi.penultimate.Sets.setOf;
 
 /**
  * Game is the main application class that handles the system commands.
@@ -10,20 +12,13 @@ import java.util.Optional;
  */
 class Game implements Commanded {
 
-    private final InhabitedWorld world;
+    private final InhabitedWorld<TwoDimensionalCoordinates> world;
 
-    private final ExistingCharacter hero;
+    private final ExistingActingCharacter<TwoDimensionalCoordinates> hero;
 
     Game() {
         world = new WhiteCube();
-
-        hero = new Human(new Name("Billy", "Bob", "Norris"), world) {
-            @Override
-            public Optional<Result> handle(Command command) {
-                System.out.println(command);
-                return Optional.empty();
-            }
-        };
+        hero = new Human<>(new Name("Billy", "Bob", "Norris"), world);
     }
 
     Character hero() {
@@ -31,14 +26,13 @@ class Game implements Commanded {
     }
 
     @Override
-    public Optional<Result> handle(Command command) {
+    public Set<Result> actOut(Command command) {
         if (command instanceof Exit) {
             System.exit(0);
         } else if (command instanceof None) {
-            return Optional.of(
-                    new Error(String.format("Nonesuch command %s",
-                            ((None) command).input())));
+            return setOf(new Error(String.format("Nonesuch command %s",
+                    ((None) command).input())));
         }
-        return Optional.of(new Error("Nonesuch command"));
+        return setOf(new Error("Nonesuch command"));
     }
 }

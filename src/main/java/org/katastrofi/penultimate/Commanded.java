@@ -1,10 +1,10 @@
 package org.katastrofi.penultimate;
 
-import java.util.Optional;
+import java.util.Set;
 
 /**
  * Commanded is an interface that entities that can be commanded implement.
- *
+ * <p/>
  * Handling of a command produces an optional result.
  *
  * @see Command
@@ -16,6 +16,6 @@ public interface Commanded {
      * @param command command to be handled
      * @return result if applicable
      */
-    Optional<Result> handle(Command command);
+    Set<Result> actOut(Command command);
 
 }
