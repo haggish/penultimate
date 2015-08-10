@@ -42,6 +42,7 @@ class WhiteCube extends FlatConstrainedWorld {
                 }
             }
         }
+        // TODO implement taking of thing off the world (to character possessions)
         return emptyList();
     }
 
