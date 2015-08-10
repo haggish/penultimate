@@ -1,7 +1,7 @@
 package org.katastrofi.penultimate;
 
 import static java.util.Collections.emptyList;
-import static org.katastrofi.penultimate.CollectionUtils.listOf;
+import static org.katastrofi.penultimate.Collections.listOf;
 import static org.katastrofi.penultimate.Location.coord;
 
 import java.util.List;

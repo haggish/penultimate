@@ -8,11 +8,11 @@ import static org.katastrofi.penultimate.Direction.SOUTH;
 import static org.katastrofi.penultimate.Direction.SOUTHEAST;
 import static org.katastrofi.penultimate.Direction.SOUTHWEST;
 import static org.katastrofi.penultimate.Direction.WEST;
+import static org.katastrofi.penultimate.VerbObjectMeansCLIParser.objectFrom;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 
 public class Main {
@@ -42,7 +42,7 @@ public class Main {
         commandMappings.put("se", (in) -> Move.to(SOUTHEAST));
         commandMappings.put("sw", (in) -> Move.to(SOUTHWEST));
         commandMappings.put("nw", (in) -> Move.to(NORTHWEST));
-        commandMappings.put("take", (in) -> new Exit()); // TODO
+        commandMappings.put("take", (in) -> new Take(objectFrom(in)));
         return commandMappings;
     }
 }

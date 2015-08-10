@@ -11,9 +11,9 @@ import java.util.Set;
 /**
  * Set utils.
  */
-public class CollectionUtils {
+public class Collections {
 
-    private CollectionUtils() {
+    private Collections() {
     }
 
     static <T> Set<T> setOf(T... ts) {

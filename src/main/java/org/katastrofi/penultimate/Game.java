@@ -1,6 +1,6 @@
 package org.katastrofi.penultimate;
 
-import static org.katastrofi.penultimate.CollectionUtils.setOf;
+import static org.katastrofi.penultimate.Collections.setOf;
 
 import java.util.Set;
 

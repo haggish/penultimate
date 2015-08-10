@@ -6,7 +6,7 @@ import static java.util.UUID.randomUUID;
 /**
  * A thing that exists somewhere in a world and can be identified uniquely.
  */
-abstract class ExistingIdentifiableThing {
+abstract class ExistingIdentifiableThing implements Thing {
 
     private final String id;
 
@@ -37,4 +37,9 @@ abstract class ExistingIdentifiableThing {
         location = location.oneUnitTo(direction);
         System.out.println("Now at " + location);
     }
+
+    public String genericName() {
+        return this.getClass().getSimpleName();
+    }
+
 }

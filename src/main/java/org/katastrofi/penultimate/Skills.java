@@ -1,6 +1,6 @@
 package org.katastrofi.penultimate;
 
-import static org.katastrofi.penultimate.CollectionUtils.setOf;
+import static org.katastrofi.penultimate.Collections.setOf;
 import static org.katastrofi.penultimate.InstanceOf.instanceOf;
 import static org.katastrofi.penultimate.Movement.movementTo;
 import static org.katastrofi.penultimate.Taking.takingOf;
@@ -26,11 +26,17 @@ class Skills {
 
     final static Skill TAKING = new Skill(instanceOf(Take.class),
             new Action(
-                    (cmd, character) ->
-                            setOf(takingOf(((Take) cmd).thing(),
-                                    character)),
-                    (cmd, character) ->
-                            character.take(((Take) cmd).thing())
+                    (cmd, character) -> character.world().thingByNameAndPlace(
+                            ((Take) cmd).thingName(), character.location())
+                            .map(t -> Collections.<Event>setOf(
+                                    takingOf(t, character)))
+                            .orElse(Collections.<Event>setOf(
+                                    takingOf(Thing.NOTHING, character))),
+                    (Command cmd, ExistingActingCharacter character) -> {
+                        character.world().thingByNameAndPlace(
+                                ((Take) cmd).thingName(), character.location())
+                                .ifPresent(character::take);
+                    }
             ));
 
 }

@@ -25,11 +25,8 @@ public class VerbObjectMeansCLIParser implements Parser<String, String> {
     @Override
     public Command commandFrom(String input) {
 
-        String[] fragments = input.split(" ", 1);
-        String verb = fragments[0];
-
         return commandParsersByVerbs
-                .getOrDefault(verb, None::new)
+                .getOrDefault(verbFrom(input), None::new)
                 .apply(input);
 
     }
@@ -37,5 +34,22 @@ public class VerbObjectMeansCLIParser implements Parser<String, String> {
     @Override
     public String outputFrom(Result result) {
         return result.toString();
+    }
+
+    static String objectFrom(String input) {
+        return fragmentFrom(input, 2);
+    }
+
+    static String verbFrom(String input) {
+        return fragmentFrom(input, 1);
+    }
+
+    static String fragmentFrom(String input, int index) {
+        String[] fragments = input.split(" ", 1);
+        if (index > 0 && index < fragments.length) {
+            return fragments[index - 1];
+        } else {
+            return null;
+        }
     }
 }
