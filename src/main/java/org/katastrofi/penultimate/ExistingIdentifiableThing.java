@@ -16,7 +16,7 @@ abstract class ExistingIdentifiableThing implements Thing {
 
     ExistingIdentifiableThing(InhabitedWorld world) {
         this.world = world;
-        this.location = world.locateRandomly(this);
+        this.location = world.randomLocationOf(Floor.class);
         this.id = randomUUID().toString();
         world.add(this);
     }

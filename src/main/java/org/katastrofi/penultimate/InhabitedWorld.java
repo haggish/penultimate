@@ -25,7 +25,8 @@ abstract class InhabitedWorld implements World {
         thingsByIDs.put(thing.id(), thing);
     }
 
-    abstract Location locateRandomly(ExistingIdentifiableThing character);
+    abstract Location randomLocationOf(
+            Class<? extends TerrainFragment> terrainType);
 
     Set<ExistingIdentifiableThing> thingsAt(Location location) {
         return thingsByIDs.values().stream()

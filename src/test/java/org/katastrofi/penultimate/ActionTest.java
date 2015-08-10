@@ -2,7 +2,7 @@ package org.katastrofi.penultimate;
 
 import org.junit.Test;
 
-class ActionTest {
+public class ActionTest {
 
     private Action instance;
 
