@@ -15,7 +15,7 @@ import static java.util.stream.Collectors.toSet;
 /**
  * World that is inhabited and has some laws of nature.
  */
-abstract class World {
+class World {
 
     private final Terrain terrain;
 
@@ -73,5 +73,4 @@ abstract class World {
                 .filter(t -> t.genericName().equals(name))
                 .findFirst();
     }
-
 }
