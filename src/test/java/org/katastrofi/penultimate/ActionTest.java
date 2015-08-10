@@ -17,7 +17,8 @@ import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static org.hamcrest.core.Is.is;
 import static org.katastrofi.penultimate.Collections.listOf;
 import static org.katastrofi.penultimate.Collections.setOf;
-import static org.katastrofi.penultimate.Location.coord;
+import static org.katastrofi.penultimate.TestData.humanIn;
+import static org.katastrofi.penultimate.TestData.oneFloor;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ActionTest {
@@ -30,7 +31,7 @@ public class ActionTest {
 
     private Human human;
 
-    private TestEvent a, b;
+    private TestData.TestEvent a, b;
 
     private Command commandForMeat;
 
@@ -40,18 +41,16 @@ public class ActionTest {
 
     @Before
     public void init() {
-        SparseMatrix<TerrainFragment> map = new SparseMatrix<>();
-        map.set(coord(1, 1), new Floor());
-        World world = new World(new Terrain(map));
-        world.declare(e -> e instanceof TestEvent,
+        World world = oneFloor();
+        world.declare(e -> e instanceof TestData.TestEvent,
                 (e, w) -> {
                     experiencedEvents.add(e);
                     return returnedResult;
                 });
-        human = new Human(new Name("Bob", null, null), world);
+        human = humanIn(world);
         instance = new Action(
                 (c, ch) -> setOf(
-                        a = new TestEvent(c, ch), b = new TestEvent(c, ch)),
+                        a = new TestData.TestEvent(c, ch), b = new TestData.TestEvent(c, ch)),
                 (c, ch) -> {
                     commandForMeat = c;
                     characterForMeat = ch;
@@ -60,14 +59,14 @@ public class ActionTest {
 
     @Test
     public void givenEventProducersEventsAreExperiencedByWorldOfCharacter() {
-        instance.apply(new TestCommand(), human);
+        instance.apply(new TestData.TestCommand(), human);
 
         assertThat(experiencedEvents, containsInAnyOrder(a, b));
     }
 
     @Test
     public void eventProducerIsGivenAppliedCommandAndCharacter() {
-        TestCommand tc = new TestCommand();
+        TestData.TestCommand tc = new TestData.TestCommand();
 
         instance.apply(tc, human);
 
@@ -80,7 +79,7 @@ public class ActionTest {
     @Test
     public void
     resultsFromWorldsEventExperiencesArePushedIntoCharactersActionHistory() {
-        instance.apply(new TestCommand(), human);
+        instance.apply(new TestData.TestCommand(), human);
 
         assertThat(human.history().get(), containsInAnyOrder(a, b));
     }
@@ -88,7 +87,7 @@ public class ActionTest {
     @Test
     public void
     ifResultsFromWorldsEventExperiencesAreOkMeatIsExecutedUsingAppliedCommandAndCharacter() {
-        TestCommand tc = new TestCommand();
+        TestData.TestCommand tc = new TestData.TestCommand();
 
         instance.apply(tc, human);
 
@@ -100,7 +99,7 @@ public class ActionTest {
     public void ifResultsContainErrorsMeatIsNotExecuted() {
         returnedResult = listOf(new Error("horror"));
 
-        instance.apply(new TestCommand(), human);
+        instance.apply(new TestData.TestCommand(), human);
 
         assertThat(commandForMeat, is(nullValue()));
         assertThat(characterForMeat, is(nullValue()));
@@ -111,19 +110,7 @@ public class ActionTest {
         Info info = new Info("haa");
         returnedResult = listOf(info);
 
-        assertThat(instance.apply(new TestCommand(), human), contains(info));
+        assertThat(instance.apply(new TestData.TestCommand(), human), contains(info));
     }
 
-    static class TestEvent implements Event {
-        private final Command c;
-        private final Character ch;
-
-        TestEvent(Command c, Character ch) {
-            this.c = c;
-            this.ch = ch;
-        }
-    }
-
-    static class TestCommand implements Command {
-    }
 }

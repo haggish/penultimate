@@ -1,4 +1,29 @@
 package org.katastrofi.penultimate;
 
+import static org.katastrofi.penultimate.Location.coord;
+
 class TestData {
+
+    static World oneFloor() {
+        SparseMatrix<TerrainFragment> map = new SparseMatrix<>();
+        map.set(coord(1, 1), new Floor());
+        return new World(new Terrain(map));
+    }
+
+    static Human humanIn(World world) {
+        return new Human(new Name("Bob", null, null), world);
+    }
+
+    static class TestEvent implements Event {
+        final Command c;
+        final Character ch;
+
+        TestEvent(Command c, Character ch) {
+            this.c = c;
+            this.ch = ch;
+        }
+    }
+
+    static class TestCommand implements Command {
+    }
 }
