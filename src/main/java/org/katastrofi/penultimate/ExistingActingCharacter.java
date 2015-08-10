@@ -1,7 +1,11 @@
 package org.katastrofi.penultimate;
 
+import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
+
+import static java.util.Collections.unmodifiableList;
 
 /**
  * Identifiable character that exists somewhere and acts in various ways.
@@ -55,6 +59,10 @@ abstract class ExistingActingCharacter<T extends Location<T>>
             if (history.size() > 10) {
                 history.removeLast();
             }
+        }
+
+        List<Event> get() {
+            return unmodifiableList(history);
         }
     }
 }
