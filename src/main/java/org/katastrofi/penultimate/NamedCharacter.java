@@ -7,7 +7,7 @@ abstract class NamedCharacter extends ExistingActingCharacter {
 
     private final Name name;
 
-    NamedCharacter(Name name, InhabitedWorld world) {
+    NamedCharacter(Name name, World world) {
         super(world);
         this.name = name;
     }

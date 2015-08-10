@@ -13,7 +13,7 @@ import java.util.Set;
  */
 class Game implements Commanded {
 
-    private final InhabitedWorld world;
+    private final World world;
 
     private final ExistingActingCharacter hero;
 

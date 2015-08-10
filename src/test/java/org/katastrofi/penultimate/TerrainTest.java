@@ -2,7 +2,7 @@ package org.katastrofi.penultimate;
 
 import org.junit.Test;
 
-public class TwoDimensionalBlockBasedTerrainTest {
+public class TerrainTest {
 
     @Test
     public void

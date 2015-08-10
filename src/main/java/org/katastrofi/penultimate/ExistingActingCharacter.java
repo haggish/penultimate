@@ -18,7 +18,7 @@ abstract class ExistingActingCharacter
 
     private Brain brain;
 
-    ExistingActingCharacter(InhabitedWorld world) {
+    ExistingActingCharacter(World world) {
         super(world);
         this.brain = new Brain(this);
     }

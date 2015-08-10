@@ -2,7 +2,7 @@ package org.katastrofi.penultimate;
 
 import org.junit.Test;
 
-public class InhabitedWorldTest {
+public class WorldTest {
 
     @Test
     public void thingsAtAddedThingsLocationReturnAddedThings() {

@@ -1,12 +1,37 @@
 package org.katastrofi.penultimate;
 
+import java.util.List;
+import java.util.Random;
+
+import static java.util.stream.Collectors.toList;
+
 /**
- * Terrain defines the 'land' of the world.
+ * Two-dimensional, block-based terrain (think Ultimate III).
  */
-interface Terrain {
+class Terrain {
 
-    Location pickRandomCoordinatesOf(Class<? extends TerrainFragment> tfClass);
+    private final SparseMatrix<TerrainFragment> map;
 
-    Boolean contains(Location coordinates);
+    private final Random random = new Random();
 
+    Terrain(SparseMatrix<TerrainFragment> map) {
+        this.map = map;
+    }
+
+    Location pickRandomCoordinatesOf(
+            Class<? extends TerrainFragment> tfClass) {
+        List<Location> locationsOfTerrainType = map.coordinates().stream()
+                .filter(c -> map.get(c).getClass().equals(tfClass))
+                .collect(toList());
+        if (locationsOfTerrainType.isEmpty()) {
+            throw new IllegalStateException("No terrain of that class");
+        }
+        int randomIdx = random.nextInt() % locationsOfTerrainType.size();
+
+        return locationsOfTerrainType.get(randomIdx);
+    }
+
+    Boolean contains(Location coordinates) {
+        return map.get(coordinates) != null;
+    }
 }

@@ -5,7 +5,7 @@ package org.katastrofi.penultimate;
  */
 interface Thing {
 
-    static final Thing NOTHING = () -> "nothing";
+    Thing NOTHING = () -> "nothing";
 
     String genericName();
 

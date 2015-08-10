@@ -5,7 +5,7 @@ package org.katastrofi.penultimate;
  */
 public class Stone extends ExistingIdentifiableThing {
 
-    Stone(InhabitedWorld world) {
+    Stone(World world) {
         super(world);
     }
 

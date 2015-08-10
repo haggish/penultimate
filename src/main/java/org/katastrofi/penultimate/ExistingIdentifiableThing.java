@@ -10,11 +10,11 @@ abstract class ExistingIdentifiableThing implements Thing {
 
     private final String id;
 
-    private final InhabitedWorld world;
+    private final World world;
 
     private Location location;
 
-    ExistingIdentifiableThing(InhabitedWorld world) {
+    ExistingIdentifiableThing(World world) {
         this.world = world;
         this.location = world.randomLocationOf(Floor.class);
         this.id = randomUUID().toString();
@@ -25,7 +25,7 @@ abstract class ExistingIdentifiableThing implements Thing {
         return id;
     }
 
-    InhabitedWorld world() {
+    World world() {
         return world;
     }
 
