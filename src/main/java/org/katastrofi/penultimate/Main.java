@@ -1,9 +1,5 @@
 package org.katastrofi.penultimate;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Supplier;
-
 import static org.katastrofi.penultimate.Direction.EAST;
 import static org.katastrofi.penultimate.Direction.NORTH;
 import static org.katastrofi.penultimate.Direction.NORTHEAST;
@@ -12,6 +8,12 @@ import static org.katastrofi.penultimate.Direction.SOUTH;
 import static org.katastrofi.penultimate.Direction.SOUTHEAST;
 import static org.katastrofi.penultimate.Direction.SOUTHWEST;
 import static org.katastrofi.penultimate.Direction.WEST;
+import static org.katastrofi.penultimate.VerbObjectMeansCLIParser.objectFrom;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
+
 
 public class Main {
 
@@ -29,19 +31,18 @@ public class Main {
 
     }
 
-
-    private static Map<String, Supplier<Command>> commandMappings() {
-        Map<String, Supplier<Command>> commandMappings = new HashMap<>();
-        commandMappings.put("exit", Exit::new);
-        commandMappings.put("n", () -> Move.to(NORTH));
-        commandMappings.put("s", () -> Move.to(SOUTH));
-        commandMappings.put("e", () -> Move.to(EAST));
-        commandMappings.put("w", () -> Move.to(WEST));
-        commandMappings.put("ne", () -> Move.to(NORTHEAST));
-        commandMappings.put("se", () -> Move.to(SOUTHEAST));
-        commandMappings.put("sw", () -> Move.to(SOUTHWEST));
-        commandMappings.put("nw", () -> Move.to(NORTHWEST));
-        commandMappings.put("take", Exit::new); // TODO parameters?
+    private static Map<String, Function<String, Command>> commandMappings() {
+        Map<String, Function<String, Command>> commandMappings = new HashMap<>();
+        commandMappings.put("exit", (in) -> new Exit());
+        commandMappings.put("n", (in) -> Move.to(NORTH));
+        commandMappings.put("s", (in) -> Move.to(SOUTH));
+        commandMappings.put("e", (in) -> Move.to(EAST));
+        commandMappings.put("w", (in) -> Move.to(WEST));
+        commandMappings.put("ne", (in) -> Move.to(NORTHEAST));
+        commandMappings.put("se", (in) -> Move.to(SOUTHEAST));
+        commandMappings.put("sw", (in) -> Move.to(SOUTHWEST));
+        commandMappings.put("nw", (in) -> Move.to(NORTHWEST));
+        commandMappings.put("take", (in) -> new Take(objectFrom(in)));
         return commandMappings;
     }
 }

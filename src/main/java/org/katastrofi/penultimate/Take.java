@@ -5,13 +5,13 @@ package org.katastrofi.penultimate;
  */
 public class Take implements Command {
 
-    private final Thing thing;
+    private final String thingName;
 
-    private Take(Thing thing) {
-        this.thing = thing;
+    Take(String thingName) {
+        this.thingName = thingName;
     }
 
-    Thing thing() {
-        return thing;
+    String thingName() {
+        return thingName;
     }
 }

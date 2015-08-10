@@ -2,9 +2,10 @@ package org.katastrofi.penultimate;
 
 import java.util.Set;
 
+
 /**
  * Commanded is an interface that entities that can be commanded implement.
- * <p/>
+ * <p>
  * Handling of a command produces an optional result.
  *
  * @see Command

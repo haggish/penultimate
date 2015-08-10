@@ -5,23 +5,21 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import static java.util.Collections.unmodifiableList;
-
 /**
  * Identifiable character that exists somewhere and acts in various ways.
  */
-abstract class ExistingActingCharacter<T extends Location<T>>
-        extends ExistingIdentifiableThing<T> implements Character {
+abstract class ExistingActingCharacter
+        extends ExistingIdentifiableThing implements Character {
 
     private ActionHistory history = new ActionHistory();
 
     private Possessions possessions = new Possessions();
 
-    private Brain<T> brain;
+    private Brain brain;
 
-    ExistingActingCharacter(InhabitedWorld<T> world) {
+    ExistingActingCharacter(InhabitedWorld world) {
         super(world);
-        this.brain = new Brain<T>(this);
+        this.brain = new Brain(this);
     }
 
     Brain brain() {
@@ -36,7 +34,7 @@ abstract class ExistingActingCharacter<T extends Location<T>>
         return brain.process(command);
     }
 
-    void learn(Skill<T> skill) {
+    void learn(Skill skill) {
         brain.learn(skill);
     }
 

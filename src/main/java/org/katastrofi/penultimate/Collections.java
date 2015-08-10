@@ -1,18 +1,19 @@
 package org.katastrofi.penultimate;
 
+import static java.util.Collections.addAll;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static java.util.Collections.addAll;
 
 /**
  * Set utils.
  */
-public class CollectionUtils {
+public class Collections {
 
-    private CollectionUtils() {
+    private Collections() {
     }
 
     static <T> Set<T> setOf(T... ts) {

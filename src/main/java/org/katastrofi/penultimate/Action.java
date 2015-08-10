@@ -1,40 +1,40 @@
 package org.katastrofi.penultimate;
 
+import static java.util.stream.Collectors.toSet;
+
 import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 
-import static java.util.stream.Collectors.toSet;
 
 /**
  * Action executed by a character.
- * <p/>
+ * <p>
  * Action is how a character reacts to a command and what results from it in
  * its world.
- * <p/>
+ * <p>
  * Action consists of its "meat", which is what essentially happens, and
  * administrative stuff: events that the "meat" produces are emitted to the
  * world and saved into character's action history.
  */
-class Action<T extends Location<T>>
-        implements
-        BiFunction<Command, ExistingActingCharacter<T>, Set<Result>> {
+class Action implements
+        BiFunction<Command, ExistingActingCharacter, Set<Result>> {
 
-    private final BiFunction<Command, ExistingActingCharacter<T>, Set<Event>>
+    private final BiFunction<Command, ExistingActingCharacter, Set<Event>>
             eventProducer;
 
-    private final BiConsumer<Command, ExistingActingCharacter<T>> meat;
+    private final BiConsumer<Command, ExistingActingCharacter> meat;
 
-    Action(BiFunction<Command, ExistingActingCharacter<T>,
+    Action(BiFunction<Command, ExistingActingCharacter,
             Set<Event>> eventProducer,
-           BiConsumer<Command, ExistingActingCharacter<T>> meat) {
+            BiConsumer<Command, ExistingActingCharacter> meat) {
         this.eventProducer = eventProducer;
         this.meat = meat;
     }
 
     @Override
     public Set<Result> apply(Command command,
-                             ExistingActingCharacter<T> character) {
+            ExistingActingCharacter character) {
         Set<Event> events = eventProducer.apply(command, character);
         Set<Result> results = events.stream()
                 .flatMap(e -> character.world().experience(e).stream())

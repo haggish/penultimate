@@ -1,7 +1,8 @@
 package org.katastrofi.penultimate;
 
 import java.util.Map;
-import java.util.function.Supplier;
+import java.util.function.Function;
+
 
 /**
  * Verb-object-means-CLI-parser is a string-based parser which expects the
@@ -14,27 +15,41 @@ import java.util.function.Supplier;
  */
 public class VerbObjectMeansCLIParser implements Parser<String, String> {
 
-    private Map<String, Supplier<Command>> commandFactoriesByVerbs;
+    private Map<String, Function<String, Command>> commandParsersByVerbs;
 
     VerbObjectMeansCLIParser(
-            Map<String, Supplier<Command>> commandFactoriesByVerbs) {
-        this.commandFactoriesByVerbs = commandFactoriesByVerbs;
+            Map<String, Function<String, Command>> commandParsersByVerbs) {
+        this.commandParsersByVerbs = commandParsersByVerbs;
     }
 
     @Override
     public Command commandFrom(String input) {
 
-        String[] fragments = input.split(" ", 1);
-        String verb = fragments[0];
-
-        return commandFactoriesByVerbs
-                .getOrDefault(verb, () -> new None<>(input))
-                .get();
+        return commandParsersByVerbs
+                .getOrDefault(verbFrom(input), None::new)
+                .apply(input);
 
     }
 
     @Override
     public String outputFrom(Result result) {
         return result.toString();
+    }
+
+    static String objectFrom(String input) {
+        return fragmentFrom(input, 2);
+    }
+
+    static String verbFrom(String input) {
+        return fragmentFrom(input, 1);
+    }
+
+    static String fragmentFrom(String input, int index) {
+        String[] fragments = input.split(" ", 1);
+        if (index > 0 && index < fragments.length) {
+            return fragments[index - 1];
+        } else {
+            return null;
+        }
     }
 }

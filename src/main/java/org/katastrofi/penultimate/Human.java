@@ -1,16 +1,17 @@
 package org.katastrofi.penultimate;
 
-import static org.katastrofi.penultimate.Skills.moving;
-import static org.katastrofi.penultimate.Skills.taking;
+import static org.katastrofi.penultimate.Skills.MOVING;
+import static org.katastrofi.penultimate.Skills.TAKING;
+
 
 /**
  * Human character.
  */
-class Human<T extends Location<T>> extends NamedCharacter<T> {
+class Human extends NamedCharacter {
 
-    Human(Name name, InhabitedWorld<T> world) {
+    Human(Name name, InhabitedWorld world) {
         super(name, world);
-        learn(moving());
-        learn(taking());
+        learn(MOVING);
+        learn(TAKING);
     }
 }

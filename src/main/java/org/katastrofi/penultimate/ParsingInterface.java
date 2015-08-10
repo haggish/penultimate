@@ -1,8 +1,9 @@
 package org.katastrofi.penultimate;
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
 
 /**
  * An interface that uses the Parser component to parse input into commands.

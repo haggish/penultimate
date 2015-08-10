@@ -1,8 +1,68 @@
 package org.katastrofi.penultimate;
 
 /**
- * Location of a thing in a world.
+ * Two dimensional whole number coordinates.
  */
-interface Location<T extends Location<T>> {
-    T oneUnitTo(Direction direction);
+class Location {
+
+    private final int x, y;
+
+    private Location(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    static Location coord(int x, int y) {
+        return new Location(x, y);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Location)) return false;
+
+        Location that = (Location) o;
+
+        if (x != that.x) return false;
+        return y == that.y;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = x;
+        result = 31 * result + y;
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Coordinate{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
+    }
+
+    public Location oneUnitTo(Direction direction) {
+        switch (direction) {
+            case EAST:
+                return coord(x + 1, y);
+            case WEST:
+                return coord(x - 1, y);
+            case NORTH:
+                return coord(x, y + 1);
+            case SOUTH:
+                return coord(x, y - 1);
+            case NORTHEAST:
+                return coord(x + 1, y + 1);
+            case SOUTHEAST:
+                return coord(x + 1, y - 1);
+            case SOUTHWEST:
+                return coord(x - 1, y - 1);
+            case NORTHWEST:
+                return coord(x - 1, y + 1);
+            default:
+                return this;
+        }
+    }
 }

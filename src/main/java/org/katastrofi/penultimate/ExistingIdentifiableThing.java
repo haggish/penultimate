@@ -1,22 +1,20 @@
 package org.katastrofi.penultimate;
 
-import static java.lang.String.format;
 import static java.util.UUID.randomUUID;
+
 
 /**
  * A thing that exists somewhere in a world and can be identified uniquely.
- *
- * @param <T> location metric that is used to locate the thing
  */
-abstract class ExistingIdentifiableThing<T extends Location<T>> {
+abstract class ExistingIdentifiableThing implements Thing {
 
     private final String id;
 
-    private final InhabitedWorld<T> world;
+    private final InhabitedWorld world;
 
-    private T location;
+    private Location location;
 
-    ExistingIdentifiableThing(InhabitedWorld<T> world) {
+    ExistingIdentifiableThing(InhabitedWorld world) {
         this.world = world;
         this.location = world.locateRandomly(this);
         this.id = randomUUID().toString();
@@ -31,7 +29,7 @@ abstract class ExistingIdentifiableThing<T extends Location<T>> {
         return world;
     }
 
-    T location() {
+    Location location() {
         return location;
     }
 
@@ -39,4 +37,9 @@ abstract class ExistingIdentifiableThing<T extends Location<T>> {
         location = location.oneUnitTo(direction);
         System.out.println("Now at " + location);
     }
+
+    public String genericName() {
+        return this.getClass().getSimpleName();
+    }
+
 }

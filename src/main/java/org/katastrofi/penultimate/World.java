@@ -2,10 +2,11 @@ package org.katastrofi.penultimate;
 
 import java.util.List;
 
+
 /**
  * World is all state that the game environment contains, including terrain
  * and characters.
- * <p/>
+ * <p>
  * It experiences events emitted by characters (and others, including itself?)
  * which can trigger changes in world, including more events.
  *

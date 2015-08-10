@@ -1,20 +1,21 @@
 package org.katastrofi.penultimate;
 
+import static java.util.stream.Collectors.toSet;
+
 import java.util.HashSet;
 import java.util.Set;
 
-import static java.util.stream.Collectors.toSet;
 
 /**
  * Brain, i.e. character's ability to react to commands.
  */
-class Brain<T extends Location<T>> {
+class Brain {
 
-    private final ExistingActingCharacter<T> owner;
+    private final ExistingActingCharacter owner;
 
-    private final Set<Skill<T>> skillSet = new HashSet<>();
+    private final Set<Skill> skillSet = new HashSet<>();
 
-    Brain(ExistingActingCharacter<T> character) {
+    Brain(ExistingActingCharacter character) {
         this.owner = character;
     }
 
@@ -26,7 +27,7 @@ class Brain<T extends Location<T>> {
                 .collect(toSet());
     }
 
-    void learn(Skill<T> skill) {
+    void learn(Skill skill) {
         skillSet.add(skill);
     }
 }

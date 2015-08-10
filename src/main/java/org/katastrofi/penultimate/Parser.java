@@ -1,14 +1,12 @@
 package org.katastrofi.penultimate;
 
-import java.util.Set;
-
 /**
  * Parser that parses an input to a command and its result to an output.
  *
  * @param <I> type of input
  * @param <O> type of output
  */
-interface Parser<I,O> {
+interface Parser<I, O> {
 
     /**
      * @param input given input
