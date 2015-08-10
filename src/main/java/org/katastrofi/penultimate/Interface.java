@@ -2,9 +2,10 @@ package org.katastrofi.penultimate;
 
 import java.util.List;
 
+
 /**
  * Interface is an interface between the game and player.
- * <p/>
+ * <p>
  * Currently it is command line / String based but it could be a JSON-
  * based REST endpoint, a TCP socket, or something else.
  *

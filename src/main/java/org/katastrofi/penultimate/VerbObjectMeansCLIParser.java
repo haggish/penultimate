@@ -3,6 +3,7 @@ package org.katastrofi.penultimate;
 import java.util.Map;
 import java.util.function.Supplier;
 
+
 /**
  * Verb-object-means-CLI-parser is a string-based parser which expects the
  * input to be in the form where the first word is a verb, potential second

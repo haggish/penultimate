@@ -1,9 +1,5 @@
 package org.katastrofi.penultimate;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Supplier;
-
 import static org.katastrofi.penultimate.Direction.EAST;
 import static org.katastrofi.penultimate.Direction.NORTH;
 import static org.katastrofi.penultimate.Direction.NORTHEAST;
@@ -12,6 +8,11 @@ import static org.katastrofi.penultimate.Direction.SOUTH;
 import static org.katastrofi.penultimate.Direction.SOUTHEAST;
 import static org.katastrofi.penultimate.Direction.SOUTHWEST;
 import static org.katastrofi.penultimate.Direction.WEST;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Supplier;
+
 
 public class Main {
 
@@ -28,7 +29,6 @@ public class Main {
         new CLI(System.console(), parser, chainOfCommand).run();
 
     }
-
 
     private static Map<String, Supplier<Command>> commandMappings() {
         Map<String, Supplier<Command>> commandMappings = new HashMap<>();

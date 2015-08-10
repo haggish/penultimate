@@ -3,10 +3,9 @@ package org.katastrofi.penultimate;
 /**
  * Just a stone.
  */
-public class Stone<T extends Location<T>>
-        extends ExistingIdentifiableThing<T> {
+public class Stone extends ExistingIdentifiableThing {
 
-    Stone(InhabitedWorld<T> world) {
+    Stone(InhabitedWorld world) {
         super(world);
     }
 

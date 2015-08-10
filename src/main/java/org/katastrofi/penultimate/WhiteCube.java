@@ -1,10 +1,11 @@
 package org.katastrofi.penultimate;
 
-import java.util.List;
-
 import static java.util.Collections.emptyList;
 import static org.katastrofi.penultimate.CollectionUtils.listOf;
-import static org.katastrofi.penultimate.XYCoordinates.coord;
+import static org.katastrofi.penultimate.Location.coord;
+
+import java.util.List;
+
 
 /**
  * White Cube is a very boring world indeed.
@@ -25,10 +26,9 @@ class WhiteCube extends FlatConstrainedWorld {
             Movement movement = (Movement) event;
             if (movement.origin() instanceof Character) {
                 @SuppressWarnings("unchecked")
-                ExistingActingCharacter<XYCoordinates> character =
-                        (ExistingActingCharacter<XYCoordinates>)
-                                movement.origin();
-                XYCoordinates destination =
+                ExistingActingCharacter character =
+                        (ExistingActingCharacter) movement.origin();
+                Location destination =
                         character.location().oneUnitTo(movement.direction());
                 if (terrain().contains(destination)) {
                     List<Result> res = listOf(

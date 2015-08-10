@@ -4,22 +4,23 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+
 /**
  * Two-dimensional sparse matrix.
  */
 class SparseMatrix<T> {
 
-    private final Map<XYCoordinates, T> elements = new HashMap<>();
+    private final Map<Location, T> elements = new HashMap<>();
 
-    T get(XYCoordinates c) {
+    T get(Location c) {
         return elements.get(c);
     }
 
-    void set(XYCoordinates c, T element) {
+    void set(Location c, T element) {
         elements.put(c, element);
     }
 
-    Set<XYCoordinates> coordinates() {
+    Set<Location> coordinates() {
         return elements.keySet();
     }
 }

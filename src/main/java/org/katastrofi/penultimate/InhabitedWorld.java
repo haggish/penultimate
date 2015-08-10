@@ -1,17 +1,18 @@
 package org.katastrofi.penultimate;
 
+import static java.util.stream.Collectors.toSet;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import static java.util.stream.Collectors.toSet;
 
 /**
  * World that is inhabited.
  */
-abstract class InhabitedWorld<T extends Location<T>> implements World {
+abstract class InhabitedWorld implements World {
 
-    private Map<String, ExistingIdentifiableThing<T>> thingsByIDs =
+    private Map<String, ExistingIdentifiableThing> thingsByIDs =
             new HashMap<>();
 
     /**
@@ -19,15 +20,15 @@ abstract class InhabitedWorld<T extends Location<T>> implements World {
      *
      * @param thing added thing
      */
-    void add(ExistingIdentifiableThing<T> thing) {
+    void add(ExistingIdentifiableThing thing) {
         thingsByIDs.put(thing.id(), thing);
     }
 
-    abstract T locateRandomly(ExistingIdentifiableThing<T> character);
+    abstract Location locateRandomly(ExistingIdentifiableThing character);
 
-    Set<ExistingIdentifiableThing<T>> thingsAt(T coordinates) {
+    Set<ExistingIdentifiableThing> thingsAt(Location location) {
         return thingsByIDs.values().stream()
-                .filter(eit -> eit.location().equals(coordinates))
+                .filter(eit -> eit.location().equals(location))
                 .collect(toSet());
     }
 

@@ -2,6 +2,7 @@ package org.katastrofi.penultimate;
 
 import java.util.function.Predicate;
 
+
 class InstanceOf<T> implements Predicate<Command> {
 
     private final Class<T> clazz;

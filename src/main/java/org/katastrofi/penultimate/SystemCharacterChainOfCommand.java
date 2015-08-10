@@ -2,10 +2,11 @@ package org.katastrofi.penultimate;
 
 import java.util.Set;
 
+
 /**
  * A chain of command, which distinguishes two types of commands; commands to
  * player's character and commands to the system.
- * <p/>
+ * <p>
  * System commands are handled by the Game, whereas player's character (Hero)
  * handles the regular commands like go west.
  *

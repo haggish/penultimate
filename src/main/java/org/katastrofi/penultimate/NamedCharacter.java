@@ -3,12 +3,11 @@ package org.katastrofi.penultimate;
 /**
  * Character with name.
  */
-abstract class NamedCharacter<T extends Location<T>>
-        extends ExistingActingCharacter<T> {
+abstract class NamedCharacter extends ExistingActingCharacter {
 
     private final Name name;
 
-    NamedCharacter(Name name, InhabitedWorld<T> world) {
+    NamedCharacter(Name name, InhabitedWorld world) {
         super(world);
         this.name = name;
     }
