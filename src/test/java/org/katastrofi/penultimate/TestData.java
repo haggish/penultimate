@@ -1,5 +1,7 @@
 package org.katastrofi.penultimate;
 
+import java.util.Collections;
+
 import static org.katastrofi.penultimate.Location.coord;
 
 class TestData {
@@ -25,5 +27,12 @@ class TestData {
     }
 
     static class TestCommand implements Command {
+    }
+
+    static class NOPAction extends Action {
+        NOPAction() {
+            super((c, ch) -> Collections.<Event>emptySet(),
+                    (c, ch) -> ch.toString()); // whatever
+        }
     }
 }

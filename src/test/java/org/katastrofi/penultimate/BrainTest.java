@@ -2,7 +2,6 @@ package org.katastrofi.penultimate;
 
 import org.junit.Test;
 
-import java.util.*;
 import java.util.Collections;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -16,28 +15,38 @@ public class BrainTest {
 
     private Boolean triggeredApplied = false;
 
-    private Boolean notTriggeredNotApplied = false;
+    private Boolean notTriggeredApplied = false;
+
+    private Command testedCommand;
 
     @Test
     public void processingCommandAppliesActionOfEveryTriggeredSkillFromSkillSet() {
-        World world = oneFloor();
-        Human human = humanIn(world);
+        Human human = humanIn(oneFloor());
         human.learn(new Skill(c -> true,
                 new Action((c, ch) -> Collections.<Event>emptySet(),
                         (c, ch) -> triggeredApplied = true)));
         human.learn(new Skill(c -> false,
                 new Action((c, ch) -> Collections.<Event>emptySet(),
-                        (c, ch) -> notTriggeredNotApplied = true)));
+                        (c, ch) -> notTriggeredApplied = true)));
 
         human.brain().process(new TestData.TestCommand());
 
         assertThat(triggeredApplied, is(true));
-        assertThat(notTriggeredNotApplied, is(true));
+        assertThat(notTriggeredApplied, is(false));
     }
 
     @Test
     public void triggeringIsGivenProcessedCommand() {
+        Human human = humanIn(oneFloor());
+        TestData.TestCommand tc = new TestData.TestCommand();
+        human.learn(new Skill(c -> {
+            testedCommand = c;
+            return true;
+        }, new TestData.NOPAction()));
 
+        human.brain().process(tc);
+
+        assertThat(tc, is(testedCommand));
     }
 
     @Test
