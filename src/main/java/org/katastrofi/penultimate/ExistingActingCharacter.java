@@ -12,7 +12,7 @@ import static java.util.Collections.unmodifiableList;
 abstract class ExistingActingCharacter
         extends ExistingIdentifiableThing implements Character {
 
-    private ActionHistory history = new ActionHistory();
+    private EventHistory history = new EventHistory();
 
     private Possessions possessions = new Possessions();
 
@@ -27,7 +27,7 @@ abstract class ExistingActingCharacter
         return brain;
     }
 
-    ActionHistory history() {
+    EventHistory history() {
         return history;
     }
 
@@ -46,11 +46,19 @@ abstract class ExistingActingCharacter
                 '}';
     }
 
-    public void take(Thing thing) {
+    void take(Thing thing) {
         possessions.add(thing);
     }
 
-    static class ActionHistory {
+    List<Thing> inventory() {
+        return possessions.inventory();
+    }
+
+    Boolean isSkilledAt(Skill skill) {
+        return brain().isSkilledAt(skill);
+    }
+
+    static class EventHistory {
         private LinkedList<Event> history = new LinkedList<>();
 
         public void push(Event event) {

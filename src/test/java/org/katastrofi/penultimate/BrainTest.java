@@ -3,11 +3,13 @@ package org.katastrofi.penultimate;
 import org.junit.Test;
 
 import java.util.Collections;
+import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
 import static org.hamcrest.core.Is.is;
 import static org.katastrofi.penultimate.Collections.listOf;
+import static org.katastrofi.penultimate.Collections.setOf;
 import static org.katastrofi.penultimate.TestData.humanIn;
 import static org.katastrofi.penultimate.TestData.oneFloor;
 
@@ -75,14 +77,22 @@ public class BrainTest {
     @Test
     public void processingReturnsAllTheResultsOfTriggeredActions() {
         World world = oneFloor();
-        Human human = humanIn(oneFloor());
+        Human human = humanIn(world);
+        human.learn(new Skill(
+                c -> true,
+                new Action(
+                        (c, ch) -> setOf(new TestData.TestEvent(c, ch)),
+                        (c, ch) -> c.toString()) // whatever
+        ));
         Result a = new TestData.TestResult(),
                 b = new TestData.TestResult();
         world.declare(e -> true, (e, w) -> listOf(a));
         world.declare(e -> true, (e, w) -> listOf(b));
 
-        assertThat(human.brain().process(new TestData.TestCommand()),
-                containsInAnyOrder(a, b));
+        Set<Result> processedResults =
+                human.brain().process(new TestData.TestCommand());
+
+        assertThat(processedResults, containsInAnyOrder(a, b));
     }
 
     @Test

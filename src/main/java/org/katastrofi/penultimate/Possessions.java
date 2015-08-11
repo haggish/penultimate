@@ -1,7 +1,8 @@
 package org.katastrofi.penultimate;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+
+import static java.util.Collections.unmodifiableList;
 
 
 /**
@@ -9,10 +10,13 @@ import java.util.Set;
  */
 class Possessions {
 
-    private Set<Thing> things = new HashSet<>();
+    private List<Thing> things = new ArrayList<>();
 
     void add(Thing thing) {
         things.add(thing);
     }
 
+    public List<Thing> inventory() {
+        return unmodifiableList(things);
+    }
 }
