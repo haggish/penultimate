@@ -31,6 +31,11 @@ class TestData {
         final Command c;
         final Character ch;
 
+        TestEvent() {
+            c = null;
+            ch = null;
+        }
+
         TestEvent(Command c, Character ch) {
             this.c = c;
             this.ch = ch;
