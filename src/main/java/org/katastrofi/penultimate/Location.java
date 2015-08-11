@@ -1,5 +1,8 @@
 package org.katastrofi.penultimate;
 
+import static java.lang.String.format;
+
+
 /**
  * Two dimensional whole number coordinates.
  */
@@ -14,6 +17,14 @@ class Location {
 
     static Location coord(int x, int y) {
         return new Location(x, y);
+    }
+
+    int x() {
+        return x;
+    }
+
+    int y() {
+        return y;
     }
 
     @Override
@@ -37,13 +48,13 @@ class Location {
 
     @Override
     public String toString() {
-        return "Coordinate{" +
-                "x=" + x +
-                ", y=" + y +
-                '}';
+        return format("(%s,%s)", x, y);
     }
 
     public Location oneUnitTo(Direction direction) {
+        if (direction == null) {
+            return this;
+        }
         switch (direction) {
             case EAST:
                 return coord(x + 1, y);

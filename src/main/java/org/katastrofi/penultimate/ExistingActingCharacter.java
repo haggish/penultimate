@@ -23,6 +23,11 @@ abstract class ExistingActingCharacter
         this.brain = new Brain(this);
     }
 
+    ExistingActingCharacter(World world, Location location) {
+        super(world, location);
+        this.brain = new Brain(this);
+    }
+
     Brain brain() {
         return brain;
     }
