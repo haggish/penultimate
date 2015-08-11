@@ -35,4 +35,7 @@ class TestData {
                     (c, ch) -> ch.toString()); // whatever
         }
     }
+
+    static class TestResult implements Result {
+    }
 }

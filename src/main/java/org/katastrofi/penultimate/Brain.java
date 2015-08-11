@@ -30,4 +30,8 @@ class Brain {
     void learn(Skill skill) {
         skillSet.add(skill);
     }
+
+    Boolean isSkilledAt(Skill skill) {
+        return skillSet.contains(skill);
+    }
 }
