@@ -76,7 +76,6 @@ public class BrainTest {
     }
 
     @Test
-    @Ignore
     public void processingReturnsAllTheResultsOfTriggeredActions() {
         World world = oneFloor();
         Human human = humanIn(world);

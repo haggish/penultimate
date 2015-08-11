@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import static java.util.Collections.emptySet;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static org.hamcrest.core.Is.is;
@@ -54,7 +55,8 @@ public class ExistingActingCharacterTest {
                         (c, ch) -> new TestData.NOPAction())));
         world.declare(e -> true, (e, w) -> listOf(a, b));
 
-        assertThat(instance.actOut(new TestData.TestCommand()), contains(a, b));
+        assertThat(instance.actOut(new TestData.TestCommand()),
+                containsInAnyOrder(a, b));
     }
 
     @Test

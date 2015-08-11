@@ -1,6 +1,7 @@
 package org.katastrofi.penultimate;
 
 import static org.katastrofi.penultimate.Collections.setOf;
+import static org.katastrofi.penultimate.Commands.EXIT;
 
 import java.util.Set;
 
@@ -13,14 +14,10 @@ import java.util.Set;
  */
 class Game implements Commanded {
 
-    private final World world;
-
     private final ExistingActingCharacter hero;
 
-    Game() {
-        world = new WhiteCube();
-        hero = new Human(new Name("Billy", "Bob", "Norris"), world);
-        new Stone(world);
+    Game(ExistingActingCharacter hero) {
+        this.hero = hero;
     }
 
     Character hero() {
@@ -29,7 +26,7 @@ class Game implements Commanded {
 
     @Override
     public Set<Result> actOut(Command command) {
-        if (command instanceof Exit) {
+        if (command.equals(EXIT)) {
             System.exit(0);
         } else if (command instanceof None) {
             return setOf(new Error(String.format("Nonesuch command %s",

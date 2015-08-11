@@ -17,7 +17,7 @@ public class InstanceOfTest {
 
     @Test
     public void commandDoesntPassTestIfItIsntOfGivenClass() {
-        assertThat(instanceOf(Exit.class)
+        assertThat(instanceOf(None.class)
                 .test(new TestData.TestCommand()), is(false));
     }
 }

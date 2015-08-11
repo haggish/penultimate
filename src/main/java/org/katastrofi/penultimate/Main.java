@@ -19,30 +19,21 @@ public class Main {
 
     public static void main(String args[]) {
 
-        Game game = new Game();
+        World world = new WhiteCube();
+
+        ExistingActingCharacter hero =
+                new Human(new Name("Billy", "Bob", "Norris"), world);
+        new Stone(world);
+
+        Game game = new Game(hero);
 
         Parser<String, String> parser =
-                new VerbObjectMeansCLIParser(commandMappings());
+                new VerbObjectMeansCLIParser(new CommandMappings().get());
 
         ChainOfCommand chainOfCommand =
                 new SystemCharacterChainOfCommand(game);
 
         new CLI(System.console(), parser, chainOfCommand).run();
 
-    }
-
-    private static Map<String, Function<String, Command>> commandMappings() {
-        Map<String, Function<String, Command>> commandMappings = new HashMap<>();
-        commandMappings.put("exit", (in) -> new Exit());
-        commandMappings.put("n", (in) -> Move.to(NORTH));
-        commandMappings.put("s", (in) -> Move.to(SOUTH));
-        commandMappings.put("e", (in) -> Move.to(EAST));
-        commandMappings.put("w", (in) -> Move.to(WEST));
-        commandMappings.put("ne", (in) -> Move.to(NORTHEAST));
-        commandMappings.put("se", (in) -> Move.to(SOUTHEAST));
-        commandMappings.put("sw", (in) -> Move.to(SOUTHWEST));
-        commandMappings.put("nw", (in) -> Move.to(NORTHWEST));
-        commandMappings.put("take", (in) -> new Take(objectFrom(in)));
-        return commandMappings;
     }
 }

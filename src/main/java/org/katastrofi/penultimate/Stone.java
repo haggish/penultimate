@@ -9,6 +9,10 @@ public class Stone extends ExistingIdentifiableThing {
         super(world);
     }
 
+    Stone(World world, Location location) {
+        super(world, location);
+    }
+
     @Override
     public String toString() {
         return "Stone";

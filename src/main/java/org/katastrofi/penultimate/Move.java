@@ -21,8 +21,22 @@ public class Move implements Command {
 
     @Override
     public String toString() {
-        return "Move{" +
-                "direction=" + direction +
-                '}';
+        return "Move to " + direction;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Move move = (Move) o;
+
+        return direction == move.direction;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return direction.hashCode();
     }
 }

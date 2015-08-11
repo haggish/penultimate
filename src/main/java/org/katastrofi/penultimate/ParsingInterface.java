@@ -11,7 +11,7 @@ import java.util.List;
  * @see Parser
  * @see Interface
  */
-abstract class ParsingInterface<I, O> implements Interface<I, O> {
+class ParsingInterface<I, O> implements Interface<I, O> {
 
     private final Parser<I, O> parser;
 

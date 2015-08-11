@@ -45,8 +45,8 @@ public class VerbObjectMeansCLIParser implements Parser<String, String> {
     }
 
     static String fragmentFrom(String input, int index) {
-        String[] fragments = input.split(" ", 1);
-        if (index > 0 && index < fragments.length) {
+        String[] fragments = input.split("\\s+");
+        if (index > 0 && index <= fragments.length) {
             return fragments[index - 1];
         } else {
             return null;
