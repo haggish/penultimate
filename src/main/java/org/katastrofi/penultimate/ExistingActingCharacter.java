@@ -23,6 +23,11 @@ abstract class ExistingActingCharacter
         this.brain = new Brain(this);
     }
 
+    ExistingActingCharacter(World world, Location location) {
+        super(world, location);
+        this.brain = new Brain(this);
+    }
+
     Brain brain() {
         return brain;
     }
@@ -48,6 +53,10 @@ abstract class ExistingActingCharacter
 
     public void take(Thing thing) {
         possessions.add(thing);
+    }
+
+    Boolean isSkilledAt(Skill skill) {
+        return brain().isSkilledAt(skill);
     }
 
     static class ActionHistory {

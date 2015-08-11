@@ -41,7 +41,7 @@ public class ExistingIdentifiableThingTest {
     public void
     movingOneUnitToGivenDirectionUpdatesThingsLocationToLocationOneUnitToGivenDirection() {
         world = twoFloors();
-        instance = humanIn(world);
+        instance = humanIn(world, coord(1, 1));
         assertThat(instance.location(), is(coord(1, 1)));
 
         instance.moveOneUnitTo(Direction.NORTH);

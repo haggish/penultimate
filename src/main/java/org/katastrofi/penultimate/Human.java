@@ -9,6 +9,12 @@ import static org.katastrofi.penultimate.Skills.TAKING;
  */
 class Human extends NamedCharacter {
 
+    Human(Name name, World world, Location location) {
+        super(name, world, location);
+        learn(MOVING);
+        learn(TAKING);
+    }
+
     Human(Name name, World world) {
         super(name, world);
         learn(MOVING);

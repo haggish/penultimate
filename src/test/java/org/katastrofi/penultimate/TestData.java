@@ -23,6 +23,10 @@ class TestData {
         return new Human(new Name("Bob", null, null), world);
     }
 
+    static Human humanIn(World world, Location location) {
+        return new Human(new Name("Bob", null, null), world, location);
+    }
+
     static class TestEvent implements Event {
         final Command c;
         final Character ch;

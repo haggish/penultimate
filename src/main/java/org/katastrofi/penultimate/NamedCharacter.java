@@ -12,6 +12,11 @@ abstract class NamedCharacter extends ExistingActingCharacter {
         this.name = name;
     }
 
+    NamedCharacter(Name name, World world, Location location) {
+        super(world, location);
+        this.name = name;
+    }
+
     Name name() {
         return name;
     }
