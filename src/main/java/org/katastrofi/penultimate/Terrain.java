@@ -1,5 +1,6 @@
 package org.katastrofi.penultimate;
 
+import static java.lang.Math.abs;
 import static java.util.stream.Collectors.toList;
 
 import java.util.List;
@@ -27,7 +28,7 @@ class Terrain {
         if (locationsOfTerrainType.isEmpty()) {
             throw new IllegalStateException("No terrain of that class");
         }
-        int randomIdx = random.nextInt() % locationsOfTerrainType.size();
+        int randomIdx = abs(random.nextInt()) % locationsOfTerrainType.size();
 
         return locationsOfTerrainType.get(randomIdx);
     }
