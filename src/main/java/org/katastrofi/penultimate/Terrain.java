@@ -1,9 +1,10 @@
 package org.katastrofi.penultimate;
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.List;
 import java.util.Random;
 
-import static java.util.stream.Collectors.toList;
 
 /**
  * Two-dimensional, block-based terrain (think Ultimate III).
@@ -33,5 +34,9 @@ class Terrain {
 
     Boolean contains(Location coordinates) {
         return map.get(coordinates) != null;
+    }
+
+    TerrainFragment fragmentAt(Location coordinates) {
+        return map.get(coordinates);
     }
 }

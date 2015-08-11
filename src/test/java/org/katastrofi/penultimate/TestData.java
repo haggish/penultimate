@@ -12,6 +12,13 @@ class TestData {
         return new World(new Terrain(map));
     }
 
+    static World twoFloors() {
+        SparseMatrix<TerrainFragment> map = new SparseMatrix<>();
+        map.set(coord(1, 1), new Floor());
+        map.set(coord(1, 2), new Floor());
+        return new World(new Terrain(map));
+    }
+
     static Human humanIn(World world) {
         return new Human(new Name("Bob", null, null), world);
     }

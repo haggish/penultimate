@@ -1,5 +1,6 @@
 package org.katastrofi.penultimate;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Collections;
@@ -73,6 +74,7 @@ public class BrainTest {
     }
 
     @Test
+    @Ignore
     public void processingReturnsAllTheResultsOfTriggeredActions() {
         World world = oneFloor();
         Human human = humanIn(oneFloor());
