@@ -19,7 +19,7 @@ class World {
 
     private final Terrain terrain;
 
-    private final Map<String, ExistingIdentifiableThing> thingsByIDs =
+    private final Map<String, Thing> thingsByIDs =
             new HashMap<>();
 
     private final Map<Predicate<Event>,
@@ -35,8 +35,12 @@ class World {
      *
      * @param thing added thing
      */
-    void add(ExistingIdentifiableThing thing) {
+    void add(Thing thing) {
         thingsByIDs.put(thing.id(), thing);
+    }
+
+    void remove(Thing thing) {
+        thingsByIDs.remove(thing);
     }
 
     Location randomLocationOf(
@@ -62,13 +66,13 @@ class World {
         lawsOfNature.put(circumstances, lawOfNature);
     }
 
-    Set<ExistingIdentifiableThing> thingsAt(Location location) {
+    Set<Thing> thingsAt(Location location) {
         return thingsByIDs.values().stream()
                 .filter(eit -> eit.location().equals(location))
                 .collect(toSet());
     }
 
-    Optional<ExistingIdentifiableThing> thingByNameAndPlace(String name, Location place) {
+    Optional<Thing> thingByNameAndPlace(String name, Location place) {
         return thingsAt(place).stream()
                 .filter(t -> t.genericName().equals(name))
                 .findFirst();

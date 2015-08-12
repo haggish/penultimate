@@ -14,9 +14,9 @@ import static org.hamcrest.core.IsNot.not;
 import static org.katastrofi.penultimate.Collections.listOf;
 import static org.katastrofi.penultimate.Collections.setOf;
 
-public class ExistingActingCharacterTest {
+public class CharacterTest {
 
-    private ExistingActingCharacter instance;
+    private Character instance;
 
     private World world;
 

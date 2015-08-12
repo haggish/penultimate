@@ -1,12 +1,52 @@
 package org.katastrofi.penultimate;
 
+import static java.util.UUID.randomUUID;
+
+
 /**
- * A thing in a world.
+ * A thing that exists somewhere in a world and can be identified uniquely.
  */
-interface Thing {
+abstract class Thing {
 
-    Thing NOTHING = () -> "nothing";
+    private final String id;
 
-    String genericName();
+    private final World world;
 
+    private Location location;
+
+    Thing(World world) {
+        this(world, world.randomLocationOf(Floor.class));
+    }
+
+    Thing(World world, Location location) {
+        this.world = world;
+        this.location = location;
+        this.id = randomUUID().toString();
+        world.add(this);
+    }
+
+    String id() {
+        return id;
+    }
+
+    World world() {
+        return world;
+    }
+
+    Location location() {
+        return location;
+    }
+
+    void moveOneUnitTo(Direction direction) {
+        location = location.oneUnitTo(direction);
+        System.out.println("Now at " + location);
+    }
+
+    void locateTo(Location location) {
+        this.location = location;
+    }
+
+    public String genericName() {
+        return this.getClass().getSimpleName();
+    }
 }

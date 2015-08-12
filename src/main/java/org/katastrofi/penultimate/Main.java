@@ -1,19 +1,5 @@
 package org.katastrofi.penultimate;
 
-import static org.katastrofi.penultimate.Direction.EAST;
-import static org.katastrofi.penultimate.Direction.NORTH;
-import static org.katastrofi.penultimate.Direction.NORTHEAST;
-import static org.katastrofi.penultimate.Direction.NORTHWEST;
-import static org.katastrofi.penultimate.Direction.SOUTH;
-import static org.katastrofi.penultimate.Direction.SOUTHEAST;
-import static org.katastrofi.penultimate.Direction.SOUTHWEST;
-import static org.katastrofi.penultimate.Direction.WEST;
-import static org.katastrofi.penultimate.VerbObjectMeansCLIParser.objectFrom;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Function;
-
 
 public class Main {
 
@@ -21,9 +7,9 @@ public class Main {
 
         World world = new WhiteCube();
 
-        ExistingActingCharacter hero =
+        Character hero =
                 new Human(new Name("Billy", "Bob", "Norris"), world);
-        new Stone(world);
+        new Stone(world, hero.location());
 
         Game game = new Game(hero);
 

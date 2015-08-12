@@ -3,7 +3,7 @@ package org.katastrofi.penultimate;
 /**
  * Just a stone.
  */
-public class Stone extends ExistingIdentifiableThing {
+public class Stone extends Thing {
 
     Stone(World world) {
         super(world);

@@ -20,7 +20,7 @@ public class SkillTest {
 
     private Character appliedCharacter;
 
-    private ExistingActingCharacter givenCharacter;
+    private Character givenCharacter;
 
     private Event expectedEvent;
 

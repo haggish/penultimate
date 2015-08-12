@@ -18,23 +18,23 @@ import java.util.function.BiFunction;
  * world and saved into character's action history.
  */
 class Action implements
-        BiFunction<Command, ExistingActingCharacter, Set<Result>> {
+        BiFunction<Command, Character, Set<Result>> {
 
-    private final BiFunction<Command, ExistingActingCharacter, Set<Event>>
+    private final BiFunction<Command, Character, Set<Event>>
             eventProducer;
 
-    private final BiConsumer<Command, ExistingActingCharacter> meat;
+    private final BiConsumer<Command, Character> meat;
 
-    Action(BiFunction<Command, ExistingActingCharacter,
+    Action(BiFunction<Command, Character,
             Set<Event>> eventProducer,
-            BiConsumer<Command, ExistingActingCharacter> meat) {
+            BiConsumer<Command, Character> meat) {
         this.eventProducer = eventProducer;
         this.meat = meat;
     }
 
     @Override
     public Set<Result> apply(Command command,
-            ExistingActingCharacter character) {
+            Character character) {
         Set<Event> events = eventProducer.apply(command, character);
         Set<Result> results = events.stream()
                 .flatMap(e -> character.world().experience(e).stream())

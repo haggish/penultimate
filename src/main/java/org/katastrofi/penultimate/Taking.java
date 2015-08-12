@@ -1,22 +1,25 @@
 package org.katastrofi.penultimate;
 
 /**
- * A discrete movement to a direction.
+ * A .
  */
-class Taking<T extends Thing> extends EventWithOrigin<T> {
+class Taking<T extends Character,
+        TT extends Thing> extends EventWithOrigin<T> {
 
-    private final Thing takenThing;
+    private final TT takenThing;
 
-    private Taking(Thing takenThing, T thing) {
+    private Taking(TT takenThing, T thing) {
         super(thing);
         this.takenThing = takenThing;
     }
 
-    static <T extends Thing> Taking takingOf(Thing takenThing, T thing) {
+    static <T extends Character,
+            TT extends Thing> Taking takingOf(
+            TT takenThing, T thing) {
         return new Taking<>(takenThing, thing);
     }
 
-    Thing takenThing() {
+    TT takenThing() {
         return takenThing;
     }
 }

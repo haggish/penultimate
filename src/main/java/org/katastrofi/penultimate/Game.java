@@ -14,9 +14,9 @@ import java.util.Set;
  */
 class Game implements Commanded {
 
-    private final ExistingActingCharacter hero;
+    private final Character hero;
 
-    Game(ExistingActingCharacter hero) {
+    Game(Character hero) {
         this.hero = hero;
     }
 

@@ -11,11 +11,11 @@ import java.util.Set;
  */
 class Brain {
 
-    private final ExistingActingCharacter owner;
+    private final Character owner;
 
     private final Set<Skill> skillSet = new HashSet<>();
 
-    Brain(ExistingActingCharacter character) {
+    Brain(Character character) {
         this.owner = character;
     }
 

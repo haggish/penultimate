@@ -1,6 +1,7 @@
 package org.katastrofi.penultimate;
 
 import static org.katastrofi.penultimate.LawsOfNature.MOVING;
+import static org.katastrofi.penultimate.LawsOfNature.TAKING;
 import static org.katastrofi.penultimate.Location.coord;
 
 
@@ -16,6 +17,8 @@ class WhiteCube extends World {
     WhiteCube(Terrain terrain) {
         super(terrain);
         declare(e -> e instanceof Movement, MOVING);
+        declare(e -> e instanceof Taking && ((Taking) e).takenThing() != null,
+                TAKING);
     }
 
     private static Terrain createMap() {

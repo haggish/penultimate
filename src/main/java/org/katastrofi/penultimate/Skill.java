@@ -11,7 +11,7 @@ import java.util.function.Predicate;
  * Skill that character's brain can do.
  */
 public class Skill implements
-        BiFunction<Command, ExistingActingCharacter, Set<Result>> {
+        BiFunction<Command, Character, Set<Result>> {
 
     private final Predicate<Command> trigger;
 
@@ -23,7 +23,7 @@ public class Skill implements
     }
 
     public Set<Result> apply(Command command,
-            ExistingActingCharacter character) {
+            Character character) {
         if (trigger.test(command)) {
             return action.apply(command, character);
         } else {

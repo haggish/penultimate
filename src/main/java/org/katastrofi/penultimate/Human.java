@@ -1,5 +1,6 @@
 package org.katastrofi.penultimate;
 
+import static org.katastrofi.penultimate.Skills.DROPPING;
 import static org.katastrofi.penultimate.Skills.MOVING;
 import static org.katastrofi.penultimate.Skills.TAKING;
 
@@ -13,11 +14,13 @@ class Human extends NamedCharacter {
         super(name, world, location);
         learn(MOVING);
         learn(TAKING);
+        learn(DROPPING);
     }
 
-    Human(Name name, World world) {
+    Human(Name name, World world) { // todo clean up constructor mess
         super(name, world);
         learn(MOVING);
         learn(TAKING);
+        learn(DROPPING);
     }
 }

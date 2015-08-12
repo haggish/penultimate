@@ -3,7 +3,7 @@ package org.katastrofi.penultimate;
 /**
  * Character with name.
  */
-abstract class NamedCharacter extends ExistingActingCharacter {
+abstract class NamedCharacter extends Character {
 
     private final Name name;
 

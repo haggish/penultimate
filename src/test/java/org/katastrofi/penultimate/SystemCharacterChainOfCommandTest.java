@@ -19,7 +19,7 @@ public class SystemCharacterChainOfCommandTest {
 
     private World world = new WhiteCube();
 
-    private ExistingActingCharacter hero;
+    private Character hero;
 
     @Before
     public void init() {

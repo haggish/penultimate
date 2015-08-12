@@ -12,9 +12,9 @@ import static org.katastrofi.penultimate.TestData.twoFloors;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ExistingIdentifiableThingTest {
+public class ThingTest {
 
-    private ExistingIdentifiableThing instance;
+    private Thing instance;
 
     private World world;
 
