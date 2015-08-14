@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 import static org.katastrofi.penultimate.Commands.EXIT;
+import static org.katastrofi.penultimate.Commands.INVENTORY;
 import static org.katastrofi.penultimate.Direction.EAST;
 import static org.katastrofi.penultimate.Direction.NORTH;
 import static org.katastrofi.penultimate.Direction.NORTHEAST;
@@ -23,6 +24,7 @@ class CommandMappings {
     Map<String, Function<String, Command>> get() {
         Map<String, Function<String, Command>> commandMappings = new HashMap<>();
         commandMappings.put("exit", (in) -> EXIT);
+
         commandMappings.put("n", (in) -> Move.to(NORTH));
         commandMappings.put("s", (in) -> Move.to(SOUTH));
         commandMappings.put("e", (in) -> Move.to(EAST));
@@ -31,8 +33,11 @@ class CommandMappings {
         commandMappings.put("se", (in) -> Move.to(SOUTHEAST));
         commandMappings.put("sw", (in) -> Move.to(SOUTHWEST));
         commandMappings.put("nw", (in) -> Move.to(NORTHWEST));
+
         commandMappings.put("take", (in) -> new Take(objectFrom(in)));
         commandMappings.put("drop", (in) -> new Drop(objectFrom(in)));
+        commandMappings.put("i", (in) -> INVENTORY);
+
         return commandMappings;
     }
 }

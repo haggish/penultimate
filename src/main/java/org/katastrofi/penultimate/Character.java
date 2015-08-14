@@ -64,7 +64,7 @@ abstract class Character extends Thing implements Commanded {
     }
 
     void drop(Thing thing) {
-        possessions.inventory().remove(thing);
+        possessions.remove(thing);
     }
 
     static class EventHistory {
