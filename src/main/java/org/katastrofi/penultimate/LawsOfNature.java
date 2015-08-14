@@ -46,6 +46,7 @@ class LawsOfNature {
                 Thing thing = dropping.droppedThing();
                 thing.locateTo(dropping.origin().location());
                 w.add(thing);
+                System.out.println(w.thingsAt(dropping.origin().location()));
                 return listOf(new Info("You dropped the " + thing));
             };
 }

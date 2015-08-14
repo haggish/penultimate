@@ -33,7 +33,7 @@ public class ActionTest {
 
     private TestData.TestEvent a, b;
 
-    private Command commandForMeat;
+    private Set<Event> eventsForMeat;
 
     private Character characterForMeat;
 
@@ -50,9 +50,10 @@ public class ActionTest {
         human = humanIn(world);
         instance = new Action(
                 (c, ch) -> setOf(
-                        a = new TestData.TestEvent(c, ch), b = new TestData.TestEvent(c, ch)),
-                (c, ch) -> {
-                    commandForMeat = c;
+                        a = new TestData.TestEvent(c, ch), b =
+                                new TestData.TestEvent(c, ch)),
+                (es, ch) -> {
+                    eventsForMeat = es;
                     characterForMeat = ch;
                 });
     }
@@ -91,7 +92,7 @@ public class ActionTest {
 
         instance.apply(tc, human);
 
-        assertThat(commandForMeat, is(tc));
+        assertThat(eventsForMeat, containsInAnyOrder(a, b));
         assertThat(characterForMeat, is(human));
     }
 
@@ -101,7 +102,7 @@ public class ActionTest {
 
         instance.apply(new TestData.TestCommand(), human);
 
-        assertThat(commandForMeat, is(nullValue()));
+        assertThat(eventsForMeat, is(nullValue()));
         assertThat(characterForMeat, is(nullValue()));
     }
 

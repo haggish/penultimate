@@ -63,12 +63,8 @@ abstract class Character extends Thing implements Commanded {
         return brain().isSkilledAt(skill);
     }
 
-    void drop(String thingName) {
-        possessions.inventory().stream()
-                .filter(t -> t.genericName().equals(thingName))
-                .findFirst().ifPresent(t -> {
-            possessions.inventory().remove(t);
-        });
+    void drop(Thing thing) {
+        possessions.inventory().remove(thing);
     }
 
     static class EventHistory {

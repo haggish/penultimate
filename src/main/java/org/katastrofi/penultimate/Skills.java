@@ -20,10 +20,13 @@ class Skills {
                     (cmd, character) ->
                             setOf(movementTo(((Move) cmd).direction(),
                                     character)),
-                    (cmd, character) ->
-                            character.moveOneUnitTo(
-                                    ((Move) cmd).direction())
-            ));
+                    (events, character) -> events.stream()
+                            .filter(e -> e instanceof Movement)
+                            .forEach(e -> {
+                                Movement movement = (Movement) e;
+                                movement.origin().moveOneUnitTo(
+                                        movement.direction());
+                            })));
 
     final static Skill TAKING = new Skill(instanceOf(Take.class),
             new Action(
@@ -32,11 +35,10 @@ class Skills {
                             .map(t -> Collections.<Event>setOf(
                                     takingOf(t, character)))
                             .orElse(java.util.Collections.<Event>emptySet()),
-                    (Command cmd, Character character) -> {
-                        character.world().thingByNameAndPlace(
-                                ((Take) cmd).thingName(), character.location())
-                                .ifPresent(character::take);
-                    }
+                    (events, character) -> events.stream()
+                            .filter(e -> e instanceof Taking)
+                            .forEach(e ->
+                                    character.take(((Taking) e).takenThing()))
             ));
 
     final static Skill DROPPING = new Skill(instanceOf(Drop.class),
@@ -47,6 +49,10 @@ class Skills {
                             .findFirst().map(t -> Collections.<Event>setOf(
                                     dropOf(t, character)))
                             .orElse(java.util.Collections.<Event>emptySet()),
-                    (cmd, character) -> character.drop(((Drop) cmd).thingName())
+                    (events, character) -> events.stream()
+                            .filter(e -> e instanceof Dropping)
+                            .forEach(e ->
+                                    character.drop(((Dropping) e)
+                                            .droppedThing()))
             ));
 }

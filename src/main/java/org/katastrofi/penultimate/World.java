@@ -40,7 +40,7 @@ class World {
     }
 
     void remove(Thing thing) {
-        thingsByIDs.remove(thing);
+        thingsByIDs.remove(thing.id());
     }
 
     Location randomLocationOf(

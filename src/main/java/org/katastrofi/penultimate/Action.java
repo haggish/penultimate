@@ -23,11 +23,11 @@ class Action implements
     private final BiFunction<Command, Character, Set<Event>>
             eventProducer;
 
-    private final BiConsumer<Command, Character> meat;
+    private final BiConsumer<Set<Event>, Character> meat;
 
     Action(BiFunction<Command, Character,
             Set<Event>> eventProducer,
-            BiConsumer<Command, Character> meat) {
+            BiConsumer<Set<Event>, Character> meat) {
         this.eventProducer = eventProducer;
         this.meat = meat;
     }
@@ -40,7 +40,7 @@ class Action implements
                 .flatMap(e -> character.world().experience(e).stream())
                 .collect(toSet());
         if (ok(results)) {
-            meat.accept(command, character);
+            meat.accept(events, character);
             events.stream().forEach(e -> character.history().push(e));
         }
         return results;

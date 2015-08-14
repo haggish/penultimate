@@ -3,6 +3,8 @@ package org.katastrofi.penultimate;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Set;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
@@ -16,7 +18,7 @@ public class SkillTest {
 
     private Skill instance;
 
-    private Command appliedCommand;
+    private Set<Event> appliedEvents;
 
     private Character appliedCharacter;
 
@@ -34,8 +36,8 @@ public class SkillTest {
                 new Action(
                         (c, ch) -> setOf(expectedEvent =
                                 new TestData.TestEvent(c, ch)),
-                        (c, ch) -> {
-                            appliedCommand = c;
+                        (es, ch) -> {
+                            appliedEvents = es;
                             appliedCharacter = ch;
                         }));
         givenCharacter.world().declare(

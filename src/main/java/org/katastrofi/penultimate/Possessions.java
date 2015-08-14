@@ -16,6 +16,10 @@ class Possessions {
         things.add(thing);
     }
 
+    void remove(Thing thing) {
+        things.remove(thing);
+    }
+
     public List<Thing> inventory() {
         return unmodifiableList(things);
     }

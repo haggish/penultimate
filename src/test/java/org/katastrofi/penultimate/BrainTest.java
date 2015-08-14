@@ -1,6 +1,5 @@
 package org.katastrofi.penultimate;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Collections;
@@ -24,19 +23,21 @@ public class BrainTest {
 
     private Command testedCommand;
 
-    private Command appliedCommand;
+    private Set<Event> appliedEvents;
 
     private Character appliedCharacter;
+
+    private Event a = new TestData.TestEvent(), b = new TestData.TestEvent();
 
     @Test
     public void processingCommandAppliesActionOfEveryTriggeredSkillFromSkillSet() {
         Human human = humanIn(oneFloor());
         human.learn(new Skill(c -> true,
                 new Action((c, ch) -> Collections.<Event>emptySet(),
-                        (c, ch) -> triggeredApplied = true)));
+                        (es, ch) -> triggeredApplied = true)));
         human.learn(new Skill(c -> false,
                 new Action((c, ch) -> Collections.<Event>emptySet(),
-                        (c, ch) -> notTriggeredApplied = true)));
+                        (es, ch) -> notTriggeredApplied = true)));
 
         human.brain().process(new TestData.TestCommand());
 
@@ -63,15 +64,15 @@ public class BrainTest {
         Human human = humanIn(oneFloor());
         TestData.TestCommand tc = new TestData.TestCommand();
         human.learn(new Skill(c -> true,
-                new Action((c, ch) -> Collections.<Event>emptySet(),
-                        (c, ch) -> {
-                            appliedCommand = c;
+                new Action((c, ch) -> setOf(a, b),
+                        (es, ch) -> {
+                            appliedEvents = es;
                             appliedCharacter = ch;
                         })));
 
         human.brain().process(tc);
 
-        assertThat(appliedCommand, is(tc));
+        assertThat(appliedEvents, containsInAnyOrder(a, b));
         assertThat(appliedCharacter, is(human));
     }
 
@@ -83,7 +84,7 @@ public class BrainTest {
                 c -> true,
                 new Action(
                         (c, ch) -> setOf(new TestData.TestEvent(c, ch)),
-                        (c, ch) -> c.toString()) // whatever
+                        (es, ch) -> es.toString()) // whatever
         ));
         Result a = new TestData.TestResult(),
                 b = new TestData.TestResult();

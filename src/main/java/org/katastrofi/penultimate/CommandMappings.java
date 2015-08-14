@@ -32,6 +32,7 @@ class CommandMappings {
         commandMappings.put("sw", (in) -> Move.to(SOUTHWEST));
         commandMappings.put("nw", (in) -> Move.to(NORTHWEST));
         commandMappings.put("take", (in) -> new Take(objectFrom(in)));
+        commandMappings.put("drop", (in) -> new Drop(objectFrom(in)));
         return commandMappings;
     }
 }

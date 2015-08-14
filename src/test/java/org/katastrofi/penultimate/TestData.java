@@ -48,7 +48,7 @@ class TestData {
     static class NOPAction extends Action {
         NOPAction() {
             super((c, ch) -> Collections.<Event>emptySet(),
-                    (c, ch) -> ch.toString()); // whatever
+                    (es, ch) -> ch.toString()); // whatever
         }
     }
 
