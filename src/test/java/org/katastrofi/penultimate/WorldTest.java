@@ -58,9 +58,9 @@ public class WorldTest {
     @Test
     public void
     lawsOfNatureTriggeredByEventsAreAppliedWithEventAndWorldAndResultsReturnedAsList() {
-        instance.declare(e -> true,
+        instance.declare(e -> e instanceof TestData.TestEvent,
                 (e, w) -> listOf(a = new TestData.TestResult()));
-        instance.declare(e -> true,
+        instance.declare(e -> e instanceof TestData.TestEvent,
                 (e, w) -> listOf(b = new TestData.TestResult()));
 
         assertThat(instance.experience(new TestData.TestEvent()),

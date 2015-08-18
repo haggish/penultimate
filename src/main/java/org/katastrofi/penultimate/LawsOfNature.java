@@ -3,6 +3,7 @@ package org.katastrofi.penultimate;
 import java.util.List;
 import java.util.function.BiFunction;
 
+import static java.util.stream.Collectors.toList;
 import static org.katastrofi.penultimate.Collections.listOf;
 
 /**
@@ -49,4 +50,7 @@ class LawsOfNature {
                 System.out.println(w.thingsAt(dropping.origin().location()));
                 return listOf(new Info("You dropped the " + thing));
             };
+
+    static final BiFunction<Event, World, List<Result>> TIME =
+            (e, w) -> w.tick().stream().collect(toList());
 }

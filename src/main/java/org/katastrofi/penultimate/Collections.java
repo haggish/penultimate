@@ -27,4 +27,9 @@ public class Collections {
         addAll(list, ts);
         return list;
     }
+
+    static <T> List<T> combined(List<T>... tss) {
+        // TODO
+        return null;
+    }
 }

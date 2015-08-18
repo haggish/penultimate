@@ -20,6 +20,7 @@ class WhiteCube extends World {
         declare(e -> e instanceof Movement, MOVING);
         declare(e -> e instanceof Taking, TAKING);
         declare(e -> e instanceof Dropping, DROPPING);
+        declare(Event.TICK::equals, LawsOfNature.TIME);
     }
 
     private static Terrain createMap() {

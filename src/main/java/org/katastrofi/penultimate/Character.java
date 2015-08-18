@@ -17,14 +17,18 @@ abstract class Character extends Thing implements Commanded {
 
     private Brain brain;
 
-    Character(World world) {
+    private Condition condition;
+
+    Character(World world, Condition condition) {
         super(world);
         this.brain = new Brain(this);
+        this.condition = condition;
     }
 
-    Character(World world, Location location) {
+    Character(World world, Location location, Condition condition) {
         super(world, location);
         this.brain = new Brain(this);
+        this.condition = condition;
     }
 
     Brain brain() {
@@ -33,6 +37,10 @@ abstract class Character extends Thing implements Commanded {
 
     EventHistory history() {
         return history;
+    }
+
+    Condition condition() {
+        return condition;
     }
 
     public Set<Result> actOut(Command command) {
@@ -51,8 +59,12 @@ abstract class Character extends Thing implements Commanded {
     }
 
     void take(Thing thing) {
-        // TODO compare thing and character properties, can thing be taken
         possessions.add(thing);
+    }
+
+    @Override
+    Set<Result> tick() {
+        return condition.age();
     }
 
     List<Thing> inventory() {

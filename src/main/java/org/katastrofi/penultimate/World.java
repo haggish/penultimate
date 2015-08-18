@@ -7,9 +7,11 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toSet;
+import static org.katastrofi.penultimate.Event.TICK;
 
 
 /**
@@ -53,6 +55,12 @@ class World {
     }
 
     public List<Result> experience(Event event) {
+        List<Result> results = experienceInternal(event);
+        results.addAll(experienceInternal(TICK));
+        return results;
+    }
+
+    private List<Result> experienceInternal(Event event) {
         return lawsOfNature.keySet().stream()
                 .filter(t -> t.test(event))
                 .map(lawsOfNature::get)
@@ -76,5 +84,11 @@ class World {
         return thingsAt(place).stream()
                 .filter(t -> t.genericName().equals(name))
                 .findFirst();
+    }
+
+    Set<Result> tick() {
+        return thingsByIDs.values().stream()
+                .flatMap(t -> t.tick().stream())
+                .collect(toSet());
     }
 }

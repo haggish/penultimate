@@ -1,6 +1,9 @@
 package org.katastrofi.penultimate;
 
+import java.util.Set;
+
 import static java.util.UUID.randomUUID;
+import static org.katastrofi.penultimate.Collections.setOf;
 
 
 /**
@@ -40,6 +43,14 @@ abstract class Thing {
     void moveOneUnitTo(Direction direction) {
         location = location.oneUnitTo(direction);
         System.out.println("Now at " + location);
+    }
+
+    /**
+     * Whatever happens when one unit of time passes.
+     */
+    Set<Result> tick() {
+        // nothing by default
+        return setOf();
     }
 
     void locateTo(Location location) {
