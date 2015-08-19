@@ -18,8 +18,7 @@ import java.util.function.BiFunction;
  * administrative stuff: events that the "meat" produces are emitted to the
  * world and saved into character's action history.
  */
-class Action implements
-        BiFunction<Command, Character, Set<Result>> {
+class Action implements BiFunction<Command, Character, Set<Result>> {
 
     private final BiFunction<Command, Character, Set<Event>>
             eventProducer;
