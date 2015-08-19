@@ -40,7 +40,6 @@ class Action implements
         Set<Result> results = events.stream()
                 .flatMap(e -> character.world().experience(e).stream())
                 .collect(toSet());
-        results.addAll(character.world().experience(TICK));
         if (ok(results)) {
             meat.accept(events, character);
             events.stream().forEach(e -> character.history().push(e));

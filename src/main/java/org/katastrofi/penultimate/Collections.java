@@ -29,7 +29,18 @@ public class Collections {
     }
 
     static <T> List<T> combined(List<T>... tss) {
-        // TODO
-        return null;
+        List<T> tso = new ArrayList<>();
+        for (List<T> ts : tss) {
+            tso.addAll(ts);
+        }
+        return tso;
+    }
+
+    static <T> Set<T> combined(Set<T>... tss) {
+        Set<T> tso = new HashSet<>();
+        for (Set<T> ts : tss) {
+            tso.addAll(ts);
+        }
+        return tso;
     }
 }

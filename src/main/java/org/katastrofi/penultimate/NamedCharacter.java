@@ -3,6 +3,7 @@ package org.katastrofi.penultimate;
 import java.util.Set;
 
 import static java.lang.String.format;
+import static org.katastrofi.penultimate.Collections.combined;
 import static org.katastrofi.penultimate.Collections.setOf;
 
 /**
@@ -28,8 +29,8 @@ abstract class NamedCharacter extends Character {
 
     @Override
     Set<Result> tick() {
-        super.tick(); // TODO combine with below
-        return setOf(new Info(format("%s %s", name, condition().toString())));
+        return combined(super.tick(),
+                setOf(new Info(format("%s %s", name, condition().toString()))));
     }
 
     @Override
