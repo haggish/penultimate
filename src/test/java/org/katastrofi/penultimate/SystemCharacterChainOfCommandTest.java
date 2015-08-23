@@ -3,6 +3,7 @@ package org.katastrofi.penultimate;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.HashMap;
 import java.util.Set;
 
 import static java.util.Collections.emptySet;
@@ -31,7 +32,7 @@ public class SystemCharacterChainOfCommandTest {
                 return emptySet();
             }
         };
-        game = new Game(hero) {
+        game = new Game(hero, new HashMap<>()) {
             @Override
             public Set<Result> actOut(Command command) {
                 handler = this;

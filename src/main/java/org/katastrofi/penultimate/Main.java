@@ -11,7 +11,7 @@ public class Main {
                 new Human(new Name("Billy", "Bob", "Norris"), world);
         new Stone(world, hero.location());
 
-        Game game = new Game(hero);
+        Game game = new Game(hero, MainGameControl.get());
 
         Parser<String, String> parser =
                 new VerbObjectMeansCLIParser(new CommandMappings().get());
