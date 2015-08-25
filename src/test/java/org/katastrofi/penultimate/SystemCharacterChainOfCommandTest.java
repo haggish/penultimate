@@ -4,9 +4,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.HashMap;
-import java.util.Set;
+import java.util.List;
 
-import static java.util.Collections.emptySet;
+import static java.util.Collections.emptyList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -27,16 +27,16 @@ public class SystemCharacterChainOfCommandTest {
         hero = new Human(new Name("Roderick", "D.", "Jaynes"),
                 world) {
             @Override
-            public Set<Result> actOut(Command command) {
+            public List<Result> actOut(Command command) {
                 handler = this;
-                return emptySet();
+                return emptyList();
             }
         };
         game = new Game(hero, new HashMap<>()) {
             @Override
-            public Set<Result> actOut(Command command) {
+            public List<Result> actOut(Command command) {
                 handler = this;
-                return emptySet();
+                return emptyList();
             }
         };
         instance = new SystemCharacterChainOfCommand(game);

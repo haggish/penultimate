@@ -43,7 +43,7 @@ abstract class Character extends Thing implements Commanded {
         return condition;
     }
 
-    public Set<Result> actOut(Command command) {
+    public List<Result> actOut(Command command) {
         return brain.process(command);
     }
 

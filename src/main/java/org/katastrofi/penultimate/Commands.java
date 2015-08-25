@@ -11,4 +11,9 @@ public class Commands {
     static final Command INVENTORY = new SystemCommand() {
     };
 
+    static final Command INIT = new SystemCommand() {
+    };
+
+    static final Command PLAY = new SystemCommand() {
+    };
 }

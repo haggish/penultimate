@@ -1,13 +1,13 @@
 package org.katastrofi.penultimate;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.function.Predicate;
 
 import static java.util.Collections.unmodifiableMap;
-import static java.util.stream.Collectors.toSet;
+import static java.util.stream.Collectors.toList;
 import static org.katastrofi.penultimate.Game.Phase.MAIN_GAME;
 
 /**
@@ -19,8 +19,9 @@ public class MainGameControl {
     }
 
     static Map<Game.Phase,
-            Map<Predicate<Command>, BiFunction<Command, Character, Set<Result>>>> get() {
-        Map<Predicate<Command>, BiFunction<Command, Character, Set<Result>>> main =
+            Map<Predicate<Command>,
+                    BiFunction<Command, Character, List<Result>>>> get() {
+        Map<Predicate<Command>, BiFunction<Command, Character, List<Result>>> main =
                 new HashMap<>();
 
         main.put(Commands.EXIT::equals, (c, ch) -> {
@@ -30,16 +31,16 @@ public class MainGameControl {
 
         main.put(Commands.INVENTORY::equals, (c, ch) -> ch.inventory().stream()
                 .map(t -> new Info(t.genericName()))
-                .collect(toSet()));
+                .collect(toList()));
 
         main.put(c -> c instanceof None,
-                (c, ch) -> Collections.<Result>setOf(
+                (c, ch) -> Collections.<Result>listOf(
                         new Error(String.format("Nonesuch command %s",
                                 ((None) c).input()))));
 
         Map<Game.Phase,
                 Map<Predicate<Command>,
-                        BiFunction<Command, Character, Set<Result>>>> ret =
+                        BiFunction<Command, Character, List<Result>>>> ret =
                 new HashMap<>();
 
         ret.put(MAIN_GAME, main);

@@ -4,10 +4,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 import java.util.function.Predicate;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -24,7 +23,7 @@ public class GameTest {
     @Before
     public void init() {
         Map<Game.Phase, Map<Predicate<Command>,
-                BiFunction<Command, Character, Set<Result>>>> commands =
+                BiFunction<Command, Character, List<Result>>>> commands =
                 new HashMap<>();
         commands.put(Game.Phase.MAIN_GAME, new HashMap<>());
         instance = new Game(humanIn(oneFloor()), commands);

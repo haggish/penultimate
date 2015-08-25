@@ -1,9 +1,10 @@
 package org.katastrofi.penultimate;
 
-import static java.util.stream.Collectors.toSet;
-
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
+import static java.util.stream.Collectors.toList;
 
 
 /**
@@ -19,12 +20,12 @@ class Brain {
         this.owner = character;
     }
 
-    Set<Result> process(Command command) {
+    List<Result> process(Command command) {
         return skillSet.stream()
                 .filter(s -> s.trigger().test(command))
                 .map(Skill::action)
                 .flatMap(a -> a.apply(command, owner).stream())
-                .collect(toSet());
+                .collect(toList());
     }
 
     void learn(Skill skill) {

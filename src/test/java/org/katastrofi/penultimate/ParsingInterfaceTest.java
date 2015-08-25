@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
-import static org.katastrofi.penultimate.Collections.setOf;
+import static org.katastrofi.penultimate.Collections.listOf;
 
 public class ParsingInterfaceTest {
 
@@ -38,7 +38,7 @@ public class ParsingInterfaceTest {
                 }
             }
         };
-        chainOfCommand = command -> setOf(expectedResult);
+        chainOfCommand = command -> listOf(expectedResult);
         instance = new ParsingInterface<>(parser, chainOfCommand);
     }
 

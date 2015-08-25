@@ -3,6 +3,7 @@ package org.katastrofi.penultimate;
 import org.junit.Test;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -91,7 +92,7 @@ public class BrainTest {
         world.declare(e -> true, (e, w) -> listOf(a));
         world.declare(e -> true, (e, w) -> listOf(b));
 
-        Set<Result> processedResults =
+        List<Result> processedResults =
                 human.brain().process(new TestData.TestCommand());
 
         assertThat(processedResults, containsInAnyOrder(a, b));

@@ -1,12 +1,14 @@
 package org.katastrofi.penultimate;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.function.Predicate;
 
-import static org.katastrofi.penultimate.Collections.setOf;
-import static org.katastrofi.penultimate.Game.Phase.MAIN_GAME;
+import static org.katastrofi.penultimate.Collections.listOf;
+import static org.katastrofi.penultimate.Commands.INIT;
+import static org.katastrofi.penultimate.Game.Phase.START;
 
 
 /**
@@ -23,16 +25,17 @@ class Game implements Commanded {
 
     private final Map<Phase,
             Map<Predicate<Command>,
-                    BiFunction<Command, Character, Set<Result>>>>
+                    BiFunction<Command, Character, List<Result>>>>
             commandMapsByPhases;
 
     Game(Character hero,
          Map<Phase, Map<Predicate<Command>,
-                 BiFunction<Command, Character, Set<Result>>>>
+                 BiFunction<Command, Character, List<Result>>>>
                  commandMapsByPhases) {
-        this.phase = MAIN_GAME;
+        this.phase = START;
         this.hero = hero;
         this.commandMapsByPhases = commandMapsByPhases;
+        actOut(INIT);
     }
 
     Character hero() {
@@ -40,16 +43,17 @@ class Game implements Commanded {
     }
 
     @Override
-    public Set<Result> actOut(Command command) {
-        return commandMapsByPhases.get(phase).entrySet().stream()
+    public List<Result> actOut(Command command) {
+        return commandMapsByPhases.getOrDefault(phase, new HashMap<>())
+                .entrySet().stream()
                 .filter(e -> e.getKey().test(command))
                 .findFirst()
                 .map(e -> e.getValue().apply(command, hero))
-                .orElse(setOf(new Error(String.format("Nonesuch command %s",
+                .orElse(listOf(new Error(String.format("Nonesuch command %s",
                         command))));
     }
 
     enum Phase {
-        CHARACTER_BUILDING, MAIN_GAME
+        START, CHARACTER_BUILDING, MAIN_GAME
     }
 }
