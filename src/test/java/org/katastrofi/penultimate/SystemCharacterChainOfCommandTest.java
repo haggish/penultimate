@@ -50,8 +50,15 @@ public class SystemCharacterChainOfCommandTest {
     }
 
     @Test
-    public void nonSystemCommandsAreActedOutByGamesHero() {
+    public void nonSystemCommandsInMainGameAreActedOutByGamesHero() {
+        game.play();
         instance.actOut(new TestData.TestCommand());
         assertThat(handler, is(hero));
+    }
+
+    @Test
+    public void nonSystemCommandsOutsideMainGameAreActedOutByGivenGame() {
+        instance.actOut(new TestData.TestCommand());
+        assertThat(handler, is(game));
     }
 }

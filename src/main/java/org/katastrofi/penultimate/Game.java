@@ -5,10 +5,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.function.Predicate;
+import java.util.logging.Logger;
 
 import static org.katastrofi.penultimate.Collections.listOf;
 import static org.katastrofi.penultimate.Commands.INIT;
+import static org.katastrofi.penultimate.Game.Phase.MAIN_GAME;
 import static org.katastrofi.penultimate.Game.Phase.START;
+import static org.katastrofi.penultimate.Functions.tap;
 
 
 /**
@@ -18,6 +21,8 @@ import static org.katastrofi.penultimate.Game.Phase.START;
  * @see SystemCommand
  */
 class Game implements Commanded {
+
+    private static final Logger LOGGER = Logger.getLogger("Game");
 
     private final Character hero;
 
@@ -32,14 +37,22 @@ class Game implements Commanded {
          Map<Phase, Map<Predicate<Command>,
                  BiFunction<Command, Character, List<Result>>>>
                  commandMapsByPhases) {
-        this.phase = START;
+        phase = START;
         this.hero = hero;
         this.commandMapsByPhases = commandMapsByPhases;
-        actOut(INIT);
+        actOut(INIT).forEach(System.out::println);
     }
 
     Character hero() {
         return hero;
+    }
+
+    Phase phase() {
+        return phase;
+    }
+
+    void play() {
+        phase = MAIN_GAME;
     }
 
     @Override
@@ -48,6 +61,7 @@ class Game implements Commanded {
                 .entrySet().stream()
                 .filter(e -> e.getKey().test(command))
                 .findFirst()
+                .map(tap(e -> LOGGER.info(e.getKey().toString())))
                 .map(e -> e.getValue().apply(command, hero))
                 .orElse(listOf(new Error(String.format("Nonesuch command %s",
                         command))));

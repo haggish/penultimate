@@ -2,6 +2,8 @@ package org.katastrofi.penultimate;
 
 import java.util.List;
 
+import static org.katastrofi.penultimate.Game.Phase.MAIN_GAME;
+
 
 /**
  * A chain of command, which distinguishes two types of commands; commands to
@@ -25,10 +27,11 @@ class SystemCharacterChainOfCommand implements ChainOfCommand {
 
     @Override
     public List<Result> actOut(Command command) {
-        if (command instanceof SystemCommand) {
-            return game.actOut(command);
-        } else {
+        if (!(command instanceof SystemCommand) &&
+                game.phase().equals(MAIN_GAME)) {
             return game.hero().actOut(command);
+        } else {
+            return game.actOut(command);
         }
     }
 }
