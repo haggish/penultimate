@@ -25,7 +25,8 @@ public class GameTest {
         Map<Game.Phase, Map<Predicate<Command>,
                 BiFunction<Command, Character, List<Result>>>> commands =
                 new HashMap<>();
-        commands.put(Game.Phase.MAIN_GAME, new HashMap<>());
+        commands.put(Game.Phase.GENERIC, new HashMap<>());
+        commands.put(Game.Phase.START, new HashMap<>());
         instance = new Game(humanIn(oneFloor()), commands);
     }
 

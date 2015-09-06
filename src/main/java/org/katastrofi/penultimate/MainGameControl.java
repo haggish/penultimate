@@ -24,19 +24,9 @@ public class MainGameControl {
         Map<Predicate<Command>, BiFunction<Command, Character, List<Result>>> main =
                 new HashMap<>();
 
-        main.put(Commands.EXIT::equals, (c, ch) -> {
-            System.exit(0);
-            return null;
-        });
-
         main.put(Commands.INVENTORY::equals, (c, ch) -> ch.inventory().stream()
                 .map(t -> new Info(t.genericName()))
                 .collect(toList()));
-
-        main.put(c -> c instanceof None,
-                (c, ch) -> Collections.<Result>listOf(
-                        new Error(String.format("Nonesuch command %s",
-                                ((None) c).input()))));
 
         Map<Game.Phase,
                 Map<Predicate<Command>,

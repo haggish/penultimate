@@ -5,15 +5,27 @@ package org.katastrofi.penultimate;
  */
 public class Commands {
 
-    static final Command EXIT = new SystemCommand() {
+    static final Command EXIT = new DescribedSystemCommand("exit");
+
+    static final Command INVENTORY = new DescribedSystemCommand("inventory") {
     };
 
-    static final Command INVENTORY = new SystemCommand() {
-    };
+    static final Command INIT = new DescribedSystemCommand("initialization");
 
-    static final Command INIT = new SystemCommand() {
-    };
+    static final Command PLAY = new DescribedSystemCommand("play");
 
-    static final Command PLAY = new SystemCommand() {
-    };
+    static class DescribedSystemCommand implements SystemCommand {
+
+        private final String desc;
+
+        DescribedSystemCommand(String desc) {
+            this.desc = desc;
+        }
+
+        @Override
+        public String toString() {
+            return desc;
+        }
+    }
+
 }

@@ -24,6 +24,7 @@ public class Main {
         commands.putAll(StartControl.get());
         commands.putAll(CharacterBuildingControl.get());
         commands.putAll(MainGameControl.get());
+        commands.putAll(GenericControl.get());
 
         Game game = new Game(hero, commands);
 
