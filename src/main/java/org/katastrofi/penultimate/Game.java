@@ -35,6 +35,8 @@ class Game implements Commanded {
 
     private Phase phase;
 
+    private Persistence persistence;
+
     private final Map<Phase, Set<SystemAction>> actionsByPhases;
 
     Game(Character hero, Map<Phase, Set<SystemAction>> actionsByPhases) {
