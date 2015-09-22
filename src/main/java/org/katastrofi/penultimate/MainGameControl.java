@@ -1,10 +1,9 @@
 package org.katastrofi.penultimate;
 
 import java.util.HashMap;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
-import java.util.function.BiFunction;
-import java.util.function.Predicate;
+import java.util.Set;
 
 import static java.util.Collections.unmodifiableMap;
 import static java.util.stream.Collectors.toList;
@@ -18,20 +17,16 @@ public class MainGameControl {
     private MainGameControl() {
     }
 
-    static Map<Game.Phase,
-            Map<Predicate<Command>,
-                    BiFunction<Command, Character, List<Result>>>> get() {
-        Map<Predicate<Command>, BiFunction<Command, Character, List<Result>>> main =
-                new HashMap<>();
+    static Map<Game.Phase, Set<SystemAction>> get() {
+        Set<SystemAction> main = new HashSet<>();
 
-        main.put(Commands.INVENTORY::equals, (c, ch) -> ch.inventory().stream()
-                .map(t -> new Info(t.genericName()))
-                .collect(toList()));
+        main.add(new SystemAction(
+                Commands.INVENTORY::equals,
+                (c, g) -> g.hero().inventory().stream()
+                        .map(t -> new Info(t.genericName()))
+                        .collect(toList())));
 
-        Map<Game.Phase,
-                Map<Predicate<Command>,
-                        BiFunction<Command, Character, List<Result>>>> ret =
-                new HashMap<>();
+        Map<Game.Phase, Set<SystemAction>> ret = new HashMap<>();
 
         ret.put(MAIN_GAME, main);
 

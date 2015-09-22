@@ -1,10 +1,9 @@
 package org.katastrofi.penultimate;
 
 import java.util.HashMap;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
-import java.util.function.BiFunction;
-import java.util.function.Predicate;
+import java.util.Set;
 
 import static org.katastrofi.penultimate.Game.Phase.GENERIC;
 
@@ -16,25 +15,23 @@ public class GenericControl {
     private GenericControl() {
     }
 
-    static Map<Game.Phase, Map<Predicate<Command>,
-            BiFunction<Command, Character, List<Result>>>> get() {
-        Map<Predicate<Command>,
-                BiFunction<Command, Character, List<Result>>> generic =
-                new HashMap<>();
+    static Map<Game.Phase, Set<SystemAction>> get() {
+        Set<SystemAction> generic = new HashSet<>();
 
-        generic.put(Commands.EXIT::equals, (c, ch) -> {
-            System.exit(0);
-            return null;
-        });
+        generic.add(new SystemAction(
+                Commands.EXIT::equals,
+                (c, g) -> {
+                    System.exit(0);
+                    return null;
+                }));
 
-        generic.put(c -> c instanceof None,
-                (c, ch) -> Collections.<Result>listOf(
+        generic.add(new SystemAction(
+                c -> c instanceof None,
+                (c, g) -> Collections.<Result>listOf(
                         new Error(String.format("Nonesuch command %s",
-                                ((None) c).input()))));
+                                ((None) c).input())))));
 
-        Map<Game.Phase, Map<Predicate<Command>,
-                BiFunction<Command, Character, List<Result>>>> ret =
-                new HashMap<>();
+        Map<Game.Phase, Set<SystemAction>> ret = new HashMap<>();
 
         ret.put(GENERIC, generic);
 

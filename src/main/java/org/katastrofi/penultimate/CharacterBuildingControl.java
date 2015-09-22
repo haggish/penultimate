@@ -1,30 +1,24 @@
 package org.katastrofi.penultimate;
 
 import java.util.HashMap;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
-import java.util.function.BiFunction;
-import java.util.function.Predicate;
+import java.util.Set;
 
 import static org.katastrofi.penultimate.Game.Phase.CHARACTER_BUILDING;
 
 /**
- * System command exe ution related to character building.
+ * System command execution related to character building.
  */
 public class CharacterBuildingControl {
 
     private CharacterBuildingControl() {
     }
 
-    static Map<Game.Phase, Map<Predicate<Command>,
-            BiFunction<Command, Character, List<Result>>>> get() {
-        Map<Game.Phase, Map<Predicate<Command>,
-                BiFunction<Command, Character, List<Result>>>> ret =
-                new HashMap<>();
+    static Map<Game.Phase, Set<SystemAction>> get() {
+        Map<Game.Phase, Set<SystemAction>> ret = new HashMap<>();
 
-        Map<Predicate<Command>,
-                BiFunction<Command, Character, List<Result>>> cb =
-                new HashMap<>();
+        Set<SystemAction> cb = new HashSet<>();
 
         ret.put(CHARACTER_BUILDING, cb);
 

@@ -4,8 +4,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.function.Predicate;
 
@@ -22,11 +24,10 @@ public class GameTest {
 
     @Before
     public void init() {
-        Map<Game.Phase, Map<Predicate<Command>,
-                BiFunction<Command, Character, List<Result>>>> commands =
+        Map<Game.Phase, Set<SystemAction>> commands =
                 new HashMap<>();
-        commands.put(Game.Phase.GENERIC, new HashMap<>());
-        commands.put(Game.Phase.START, new HashMap<>());
+        commands.put(Game.Phase.GENERIC, new HashSet<>());
+        commands.put(Game.Phase.START, new HashSet<>());
         instance = new Game(humanIn(oneFloor()), commands);
     }
 

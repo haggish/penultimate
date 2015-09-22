@@ -1,14 +1,14 @@
 package org.katastrofi.penultimate;
 
 import java.util.HashMap;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
-import java.util.function.BiFunction;
-import java.util.function.Predicate;
+import java.util.Set;
 
 import static org.katastrofi.penultimate.Collections.listOf;
 import static org.katastrofi.penultimate.Commands.INIT;
 import static org.katastrofi.penultimate.Game.Phase.START;
+import static org.katastrofi.penultimate.Info.i;
 
 /**
  * System commands related to game start.
@@ -18,22 +18,19 @@ public class StartControl {
     private StartControl() {
     }
 
-    static Map<Game.Phase, Map<Predicate<Command>,
-            BiFunction<Command, Character, List<Result>>>> get() {
-        Map<Game.Phase, Map<Predicate<Command>,
-                BiFunction<Command, Character, List<Result>>>> ret =
-                new HashMap<>();
+    static Map<Game.Phase, Set<SystemAction>> get() {
+        Map<Game.Phase, Set<SystemAction>> ret = new HashMap<>();
 
-        Map<Predicate<Command>,
-                BiFunction<Command, Character, List<Result>>> start =
-                new HashMap<>();
+        Set<SystemAction> start = new HashSet<>();
 
-        start.put(INIT::equals,
-                (c, ch) -> listOf(
-                        new Info("WELCOME! Would you like to "),
-                        new Info("'load <characterNumber>' or"),
-                        new Info("'build' a new character ?")
-                ));
+        start.add(new SystemAction(INIT::equals,
+                (c, g) -> listOf(
+                        i("WELCOME! Would you like to "),
+                        i("'load <characterNumber>' or"),
+                        i("'build' a new character ?"),
+                        i("Available characters:"),
+                        i("#1: Hank")
+                )));
 
         // result = kuka hero on ladattu jos kukaan
 

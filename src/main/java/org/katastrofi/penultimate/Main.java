@@ -4,6 +4,7 @@ package org.katastrofi.penultimate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.function.Predicate;
 
@@ -17,9 +18,7 @@ public class Main {
                 new Human(new Name("Billy", "Bob", "Norris"), world);
         new Stone(world, hero.location());
 
-        Map<Game.Phase, Map<Predicate<Command>,
-                BiFunction<Command, Character, List<Result>>>> commands =
-                new HashMap<>();
+        Map<Game.Phase, Set<SystemAction>> commands = new HashMap<>();
 
         commands.putAll(StartControl.get());
         commands.putAll(CharacterBuildingControl.get());

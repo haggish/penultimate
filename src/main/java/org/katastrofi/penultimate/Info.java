@@ -7,6 +7,10 @@ class Info implements Result {
 
     private final String message;
 
+    static Info i(String msg) {
+        return new Info(msg);
+    }
+
     Info(String message) {
         this.message = message;
     }
