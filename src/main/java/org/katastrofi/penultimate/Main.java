@@ -29,12 +29,12 @@ public class Main {
         Game game = new Game(hero, commands);
 
         Parser<String, String> parser =
-                new VerbObjectMeansCLIParser(new CommandMappings().get());
+                new VerbObjectMeansREPLParser(new CommandMappings().get());
 
         ChainOfCommand chainOfCommand =
                 new SystemCharacterChainOfCommand(game);
 
-        new CLI(System.console(), parser, chainOfCommand).run();
+        new REPL(System.console(), parser, chainOfCommand).run();
 
     }
 }

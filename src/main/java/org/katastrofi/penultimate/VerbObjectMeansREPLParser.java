@@ -5,7 +5,7 @@ import java.util.function.Function;
 
 
 /**
- * Verb-object-means-CLI-parser is a string-based parser which expects the
+ * Verb-object-means-REPL-parser is a string-based parser which expects the
  * input to be in the form where the first word is a verb, potential second
  * one is an object and the rest is a refinement of means to carry out the
  * command, e.g. "hit orc with hammer".
@@ -13,11 +13,11 @@ import java.util.function.Function;
  * @see ChainOfCommand
  * @see Parser
  */
-public class VerbObjectMeansCLIParser implements Parser<String, String> {
+public class VerbObjectMeansREPLParser implements Parser<String, String> {
 
     private Map<String, Function<String, Command>> commandParsersByVerbs;
 
-    VerbObjectMeansCLIParser(
+    VerbObjectMeansREPLParser(
             Map<String, Function<String, Command>> commandParsersByVerbs) {
         this.commandParsersByVerbs = commandParsersByVerbs;
     }

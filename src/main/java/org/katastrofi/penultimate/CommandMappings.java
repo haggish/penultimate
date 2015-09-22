@@ -14,7 +14,7 @@ import static org.katastrofi.penultimate.Direction.SOUTH;
 import static org.katastrofi.penultimate.Direction.SOUTHEAST;
 import static org.katastrofi.penultimate.Direction.SOUTHWEST;
 import static org.katastrofi.penultimate.Direction.WEST;
-import static org.katastrofi.penultimate.VerbObjectMeansCLIParser.objectFrom;
+import static org.katastrofi.penultimate.VerbObjectMeansREPLParser.objectFrom;
 
 /**
  * String-to-Command mappings.

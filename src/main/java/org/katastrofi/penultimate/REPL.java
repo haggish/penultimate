@@ -4,19 +4,19 @@ import java.io.Console;
 
 
 /**
- * CLI (Command Line Interface) is a text-based interface to the game.
+ * REPL, a text-based interface to the game.
  * <p>
  * A parser is used to parse input to commands and command results to
  * potential output.
  *
  * @see ParsingInterface
  */
-public class CLI extends ParsingInterface<String, String> {
+public class REPL extends ParsingInterface<String, String> {
 
     private final Console console;
 
-    CLI(Console console, Parser<String, String> parser,
-            ChainOfCommand chainOfCommand) {
+    REPL(Console console, Parser<String, String> parser,
+         ChainOfCommand chainOfCommand) {
         super(parser, chainOfCommand);
         this.console = console;
     }

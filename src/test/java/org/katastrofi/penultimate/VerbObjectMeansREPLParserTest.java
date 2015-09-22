@@ -10,13 +10,13 @@ import java.util.function.Function;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.nullValue;
-import static org.katastrofi.penultimate.VerbObjectMeansCLIParser.fragmentFrom;
-import static org.katastrofi.penultimate.VerbObjectMeansCLIParser.objectFrom;
-import static org.katastrofi.penultimate.VerbObjectMeansCLIParser.verbFrom;
+import static org.katastrofi.penultimate.VerbObjectMeansREPLParser.fragmentFrom;
+import static org.katastrofi.penultimate.VerbObjectMeansREPLParser.objectFrom;
+import static org.katastrofi.penultimate.VerbObjectMeansREPLParser.verbFrom;
 
-public class VerbObjectMeansCLIParserTest {
+public class VerbObjectMeansREPLParserTest {
 
-    private VerbObjectMeansCLIParser instance;
+    private VerbObjectMeansREPLParser instance;
 
     private Command expectedCommand = new TestData.TestCommand();
 
@@ -31,7 +31,7 @@ public class VerbObjectMeansCLIParserTest {
             inputReceivedByCommand = s;
             return expectedCommand;
         });
-        instance = new VerbObjectMeansCLIParser(commandMap);
+        instance = new VerbObjectMeansREPLParser(commandMap);
     }
 
     @Test
